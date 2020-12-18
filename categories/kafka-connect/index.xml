@@ -1,0 +1,820 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kafka Connect on rmoff&#39;s random ramblings</title>
+    <link>https://rmoff.net/categories/kafka-connect/</link>
+    <description>Recent content in Kafka Connect on rmoff&#39;s random ramblings</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 18 Dec 2020 16:00:00 +0000</lastBuildDate><atom:link href="https://rmoff.net/categories/kafka-connect/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>🎄 Twelve Days of SMT 🎄 - Day 9: Cast</title>
+      <link>https://rmoff.net/2020/12/18/twelve-days-of-smt-day-9-cast/</link>
+      <pubDate>Fri, 18 Dec 2020 16:00:00 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2020/12/18/twelve-days-of-smt-day-9-cast/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;The &lt;a href=&#34;https://docs.confluent.io/platform/current/connect/transforms/cast.html&#34;&gt;&lt;code&gt;Cast&lt;/code&gt;&lt;/a&gt; Single Message Transform lets you change the data type of fields in a Kafka message, supporting numerics, string, and boolean.&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>🎄 Twelve Days of SMT 🎄 - Day 8: TimestampConverter</title>
+      <link>https://rmoff.net/2020/12/17/twelve-days-of-smt-day-8-timestampconverter/</link>
+      <pubDate>Thu, 17 Dec 2020 16:00:00 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2020/12/17/twelve-days-of-smt-day-8-timestampconverter/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;The &lt;a href=&#34;https://docs.confluent.io/platform/current/connect/transforms/timestampconverter.html&#34;&gt;&lt;code&gt;TimestampConverter&lt;/code&gt;&lt;/a&gt; Single Message Transform lets you work with timestamp fields in Kafka messages. You can convert a string into a native &lt;a href=&#34;https://kafka.apache.org/26/javadoc/org/apache/kafka/connect/data/Timestamp.html&#34;&gt;Timestamp&lt;/a&gt; type (or &lt;a href=&#34;https://kafka.apache.org/26/javadoc/org/apache/kafka/connect/data/Date.html&#34;&gt;Date&lt;/a&gt; or &lt;a href=&#34;https://kafka.apache.org/26/javadoc/org/apache/kafka/connect/data/Time.html&#34;&gt;Time&lt;/a&gt;), as well as Unix epoch - and the same in reverse too.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;This is really useful to make sure that data ingested into Kafka is correctly stored as a Timestamp (if it is one), and also enables you to write a Timestamp out to a sink connector in a string format that you choose.&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>🎄 Twelve Days of SMT 🎄 - Day 7: TimestampRouter</title>
+      <link>https://rmoff.net/2020/12/16/twelve-days-of-smt-day-7-timestamprouter/</link>
+      <pubDate>Wed, 16 Dec 2020 16:00:00 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2020/12/16/twelve-days-of-smt-day-7-timestamprouter/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;Just like the &lt;a href=&#34;https://rmoff.net/2020/12/11/twelve-days-of-smt-day-4-regexrouter/&#34;&gt;&lt;code&gt;RegExRouter&lt;/code&gt;&lt;/a&gt;, the &lt;a href=&#34;https://docs.confluent.io/platform/current/connect/transforms/timestamprouter.html&#34;&gt;&lt;code&gt;TimeStampRouter&lt;/code&gt;&lt;/a&gt; can be used to modify the topic name of messages as they pass through Kafka Connect. Since the topic name is usually the basis for the naming of the object to which messages are written in a sink connector, this is a great way to achieve time-based partitioning of those objects if required. For example, instead of streaming messages from Kafka to an Elasticsearch index called &lt;code&gt;cars&lt;/code&gt;, they can be routed to monthly indices e.g. &lt;code&gt;cars_2020-10&lt;/code&gt;, &lt;code&gt;cars_2020-11&lt;/code&gt;, &lt;code&gt;cars_2020-12&lt;/code&gt;, etc.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;The &lt;code&gt;TimeStampRouter&lt;/code&gt; takes two arguments; the format of the final topic name to generate, and the format of the timestamp to put in the topic name (based on &lt;a href=&#34;https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html&#34;&gt;&lt;code&gt;SimpleDateFormat&lt;/code&gt;&lt;/a&gt;).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;listingblock&#34;&gt;
+&lt;div class=&#34;content&#34;&gt;
+&lt;pre class=&#34;rouge highlight&#34; style=&#34;background-color: #f8f8f8&#34;&gt;&lt;code data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;transforms&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;                                     &lt;span style=&#34;background-color: #f8f8f8&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;addTimestampToTopic&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;background-color: #f8f8f8&#34;&gt;,&lt;/span&gt;
+&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;transforms.addTimestampToTopic.type&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;            &lt;span style=&#34;background-color: #f8f8f8&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;org.apache.kafka.connect.transforms.TimestampRouter&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;background-color: #f8f8f8&#34;&gt;,&lt;/span&gt;
+&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;transforms.addTimestampToTopic.topic.format&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;    &lt;span style=&#34;background-color: #f8f8f8&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;${topic}_${timestamp}&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;background-color: #f8f8f8&#34;&gt;,&lt;/span&gt;
+&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;transforms.addTimestampToTopic.timestamp.format&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;background-color: #f8f8f8&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;YYYY-MM-dd&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>🎄 Twelve Days of SMT 🎄 - Day 6: InsertField II</title>
+      <link>https://rmoff.net/2020/12/15/twelve-days-of-smt-day-6-insertfield-ii/</link>
+      <pubDate>Tue, 15 Dec 2020 16:00:00 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2020/12/15/twelve-days-of-smt-day-6-insertfield-ii/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;We kicked off this series by seeing on &lt;a href=&#34;https://rmoff.net/2020/12/08/twelve-days-of-smt-day-1-insertfield-timestamp/&#34;&gt;day 1&lt;/a&gt; how to use &lt;a href=&#34;https://docs.confluent.io/platform/current/connect/transforms/insertfield.html&#34;&gt;&lt;code&gt;InsertField&lt;/code&gt;&lt;/a&gt; to add in the timestamp to a message passing through the Kafka Connect sink connector. Today we’ll see how to use the same Single Message Transform to add in a static field value, as well as the name of the Kafka topic, partition, and offset from which the message has been read.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;listingblock&#34;&gt;
+&lt;div class=&#34;content&#34;&gt;
+&lt;pre class=&#34;rouge highlight&#34; style=&#34;background-color: #f8f8f8&#34;&gt;&lt;code data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;transforms&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;                                &lt;span style=&#34;background-color: #f8f8f8&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;insertStaticField1&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;background-color: #f8f8f8&#34;&gt;,&lt;/span&gt;
+&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;transforms.insertStaticField1.type&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;        &lt;span style=&#34;background-color: #f8f8f8&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;org.apache.kafka.connect.transforms.InsertField$Value&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;background-color: #f8f8f8&#34;&gt;,&lt;/span&gt;
+&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;transforms.insertStaticField1.static.field&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;background-color: #f8f8f8&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;sourceSystem&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;background-color: #f8f8f8&#34;&gt;,&lt;/span&gt;
+&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;transforms.insertStaticField1.static.value&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;background-color: #f8f8f8&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;NeverGonna&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>🎄 Twelve Days of SMT 🎄 - Day 5: MaskField</title>
+      <link>https://rmoff.net/2020/12/14/twelve-days-of-smt-day-5-maskfield/</link>
+      <pubDate>Mon, 14 Dec 2020 16:00:00 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2020/12/14/twelve-days-of-smt-day-5-maskfield/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;If you want to mask fields of data as you ingest from a source into Kafka, or write to a sink from Kafka with Kafka Connect, the &lt;a href=&#34;https://docs.confluent.io/platform/current/connect/transforms/maskfield.html&#34;&gt;&lt;code&gt;MaskField&lt;/code&gt;&lt;/a&gt; Single Message Transform is perfect for you. It retains the fields whilst replacing its value.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;To use the Single Message Transform you specify the field to mask, and its replacement value. To mask the contents of a field called &lt;code&gt;cc_num&lt;/code&gt; you would use:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;listingblock&#34;&gt;
+&lt;div class=&#34;content&#34;&gt;
+&lt;pre class=&#34;rouge highlight&#34; style=&#34;background-color: #f8f8f8&#34;&gt;&lt;code data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;transforms&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;                               &lt;span style=&#34;background-color: #f8f8f8&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;maskCC&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;background-color: #f8f8f8&#34;&gt;,&lt;/span&gt;
+&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;transforms.maskCC.type&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;                   &lt;span style=&#34;background-color: #f8f8f8&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;org.apache.kafka.connect.transforms.MaskField$Value&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;background-color: #f8f8f8&#34;&gt;,&lt;/span&gt;
+&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;transforms.maskCC.fields&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;                 &lt;span style=&#34;background-color: #f8f8f8&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;cc_num&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;background-color: #f8f8f8&#34;&gt;,&lt;/span&gt;
+&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;transforms.maskCC.replacement&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;            &lt;span style=&#34;background-color: #f8f8f8&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;****-****-****-****&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>🎄 Twelve Days of SMT 🎄 - Day 4: RegExRouter</title>
+      <link>https://rmoff.net/2020/12/11/twelve-days-of-smt-day-4-regexrouter/</link>
+      <pubDate>Fri, 11 Dec 2020 16:40:18 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2020/12/11/twelve-days-of-smt-day-4-regexrouter/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;If you want to change the topic name to which a source connector writes, or object name that’s created on a target by a sink connector, the &lt;a href=&#34;https://docs.confluent.io/platform/current/connect/transforms/regexrouter.html&#34;&gt;&lt;code&gt;RegExRouter&lt;/code&gt;&lt;/a&gt; is exactly what you need.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;To use the Single Message Transform you specify the pattern in the topic name to match, and its replacement. To drop a prefix of &lt;code&gt;test-&lt;/code&gt; from a topic you would use:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;listingblock&#34;&gt;
+&lt;div class=&#34;content&#34;&gt;
+&lt;pre class=&#34;rouge highlight&#34; style=&#34;background-color: #f8f8f8&#34;&gt;&lt;code data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;transforms&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;                             &lt;span style=&#34;background-color: #f8f8f8&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;dropTopicPrefix&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;background-color: #f8f8f8&#34;&gt;,&lt;/span&gt;
+&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;transforms.dropTopicPrefix.type&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;        &lt;span style=&#34;background-color: #f8f8f8&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;org.apache.kafka.connect.transforms.RegexRouter&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;background-color: #f8f8f8&#34;&gt;,&lt;/span&gt;
+&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;transforms.dropTopicPrefix.regex&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;       &lt;span style=&#34;background-color: #f8f8f8&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;test-(.*)&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;background-color: #f8f8f8&#34;&gt;,&lt;/span&gt;
+&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;transforms.dropTopicPrefix.replacement&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;background-color: #f8f8f8&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;$1&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>🎄 Twelve Days of SMT 🎄 - Day 3: Flatten</title>
+      <link>https://rmoff.net/2020/12/10/twelve-days-of-smt-day-3-flatten/</link>
+      <pubDate>Thu, 10 Dec 2020 16:25:00 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2020/12/10/twelve-days-of-smt-day-3-flatten/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;The &lt;a href=&#34;https://docs.confluent.io/platform/current/connect/transforms/flatten.html&#34;&gt;&lt;code&gt;Flatten&lt;/code&gt;&lt;/a&gt; Single Message Transform (SMT) is useful when you need to collapse a nested message down to a flat structure.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;To use the Single Message Transform you only need to reference it; there’s no additional configuration required:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;listingblock&#34;&gt;
+&lt;div class=&#34;content&#34;&gt;
+&lt;pre class=&#34;rouge highlight&#34; style=&#34;background-color: #f8f8f8&#34;&gt;&lt;code data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;transforms&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;                    &lt;span style=&#34;background-color: #f8f8f8&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;flatten&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;background-color: #f8f8f8&#34;&gt;,&lt;/span&gt;
+&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;transforms.flatten.type&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;       &lt;span style=&#34;background-color: #f8f8f8&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;org.apache.kafka.connect.transforms.Flatten$Value&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>🎄 Twelve Days of SMT 🎄 - Day 2: ValueToKey and ExtractField</title>
+      <link>https://rmoff.net/2020/12/09/twelve-days-of-smt-day-2-valuetokey-and-extractfield/</link>
+      <pubDate>Wed, 09 Dec 2020 20:00:18 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2020/12/09/twelve-days-of-smt-day-2-valuetokey-and-extractfield/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;Setting the key of a Kafka message is important as it ensures correct logical processing when consumed across multiple partitions, as well as being a requirement when joining to messages in other topics. When using Kafka Connect the connector may already set the key, which is great. If not, you can use these two Single Message Transforms (SMT) to set it as part of the pipeline based on a field in the value part of the message.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;To use the &lt;a href=&#34;https://docs.confluent.io/platform/current/connect/transforms/valuetokey.html&#34;&gt;&lt;code&gt;ValueToKey&lt;/code&gt;&lt;/a&gt; Single Message Transform specify the name of the field (&lt;code&gt;id&lt;/code&gt;) that you want to copy from the value to the key:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;listingblock&#34;&gt;
+&lt;div class=&#34;content&#34;&gt;
+&lt;pre class=&#34;rouge highlight&#34; style=&#34;background-color: #f8f8f8&#34;&gt;&lt;code data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;transforms&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;                    &lt;span style=&#34;background-color: #f8f8f8&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;copyIdToKey&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;background-color: #f8f8f8&#34;&gt;,&lt;/span&gt;
+&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;transforms.copyIdToKey.type&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;   &lt;span style=&#34;background-color: #f8f8f8&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;org.apache.kafka.connect.transforms.ValueToKey&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;background-color: #f8f8f8&#34;&gt;,&lt;/span&gt;
+&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;transforms.copyIdToKey.fields&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;background-color: #f8f8f8&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;id&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;background-color: #f8f8f8&#34;&gt;,&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>🎄 Twelve Days of SMT 🎄 - Day 1: InsertField (timestamp)</title>
+      <link>https://rmoff.net/2020/12/08/twelve-days-of-smt-day-1-insertfield-timestamp/</link>
+      <pubDate>Tue, 08 Dec 2020 22:23:18 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2020/12/08/twelve-days-of-smt-day-1-insertfield-timestamp/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;You can use the &lt;a href=&#34;https://docs.confluent.io/platform/current/connect/transforms/insertfield.html&#34;&gt;&lt;code&gt;InsertField&lt;/code&gt;&lt;/a&gt; Single Message Transform (SMT) to add the message timestamp into each message that Kafka Connect sends to a sink.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;To use the Single Message Transform specify the name of the field (&lt;code&gt;timestamp.field&lt;/code&gt;) that you want to add to hold the message timestamp:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;listingblock&#34;&gt;
+&lt;div class=&#34;content&#34;&gt;
+&lt;pre class=&#34;rouge highlight&#34; style=&#34;background-color: #f8f8f8&#34;&gt;&lt;code data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;transforms&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;                         &lt;span style=&#34;background-color: #f8f8f8&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;insertTS&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;background-color: #f8f8f8&#34;&gt;,&lt;/span&gt;
+&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;transforms.insertTS.type&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;           &lt;span style=&#34;background-color: #f8f8f8&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;org.apache.kafka.connect.transforms.InsertField$Value&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;background-color: #f8f8f8&#34;&gt;,&lt;/span&gt;
+&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;transforms.insertTS.timestamp.field&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;background-color: #f8f8f8&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;messageTS&lt;/span&gt;&lt;span style=&#34;color: #d14&#34;&gt;&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Kafka Connect, ksqlDB, and Kafka Tombstone messages</title>
+      <link>https://rmoff.net/2020/11/03/kafka-connect-ksqldb-and-kafka-tombstone-messages/</link>
+      <pubDate>Tue, 03 Nov 2020 17:14:33 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2020/11/03/kafka-connect-ksqldb-and-kafka-tombstone-messages/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;As you may already realise, Kafka is not just a fancy message bus, or a pipe for big data. It’s an event streaming platform! If this is news to you, I’ll wait here whilst you &lt;a href=&#34;https://www.confluent.io/learn/kafka-tutorial/&#34;&gt;read this&lt;/a&gt; or &lt;a href=&#34;https://rmoff.dev/kafka101&#34;&gt;watch this&lt;/a&gt;…&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Streaming Geopoint data from Kafka to Elasticsearch</title>
+      <link>https://rmoff.net/2020/11/03/streaming-geopoint-data-from-kafka-to-elasticsearch/</link>
+      <pubDate>Tue, 03 Nov 2020 10:36:18 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2020/11/03/streaming-geopoint-data-from-kafka-to-elasticsearch/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;Streaming data from Kafka to Elasticsearch is easy with Kafka Connect - you can see how in this &lt;a href=&#34;https://rmoff.dev/kafka-elasticsearch&#34;&gt;tutorial&lt;/a&gt; and &lt;a href=&#34;https://rmoff.dev/kafka-elasticsearch-video&#34;&gt;video&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;One of the things that sometimes causes issues though is how to get location data correctly indexed into Elasticsearch as &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-point.html&#34;&gt;&lt;code&gt;geo_point&lt;/code&gt;&lt;/a&gt; fields to enable all that lovely location analysis. Unlike data types like dates and numerics, Elasticsearch’s &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/dynamic-field-mapping.html&#34;&gt;Dynamic Field Mapping&lt;/a&gt; won’t automagically pick up &lt;code&gt;geo_point&lt;/code&gt; data, and so you have to do two things:&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Streaming XML messages from IBM MQ into Kafka into MongoDB</title>
+      <link>https://rmoff.net/2020/10/05/streaming-xml-messages-from-ibm-mq-into-kafka-into-mongodb/</link>
+      <pubDate>Mon, 05 Oct 2020 10:09:41 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2020/10/05/streaming-xml-messages-from-ibm-mq-into-kafka-into-mongodb/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;Let’s imagine we have XML data on a queue in IBM MQ, and we want to ingest it into Kafka to then use downstream, perhaps in an application or maybe to stream to a NoSQL store like MongoDB.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;admonitionblock note&#34;&gt;
+&lt;table&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td class=&#34;icon&#34;&gt;
+&lt;div class=&#34;title&#34;&gt;Note&lt;/div&gt;
+&lt;/td&gt;
+&lt;td class=&#34;content&#34;&gt;
+This same pattern for ingesting XML will work with other connectors such as &lt;a href=&#34;https://www.confluent.io/hub/confluentinc/kafka-connect-jms&#34;&gt;JMS&lt;/a&gt; and &lt;a href=&#34;https://www.confluent.io/hub/confluentinc/kafka-connect-activemq&#34;&gt;ActiveMQ&lt;/a&gt;.
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Ingesting XML data into Kafka - Option 3: Kafka Connect FilePulse connector</title>
+      <link>https://rmoff.net/2020/10/01/ingesting-xml-data-into-kafka-option-3-kafka-connect-filepulse-connector/</link>
+      <pubDate>Thu, 01 Oct 2020 15:09:41 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2020/10/01/ingesting-xml-data-into-kafka-option-3-kafka-connect-filepulse-connector/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;👉 &lt;em&gt;&lt;a href=&#34;https://rmoff.net/2020/10/01/ingesting-xml-data-into-kafka-introduction/&#34;&gt;Ingesting XML data into Kafka - Introduction&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;We saw in the &lt;a href=&#34;https://rmoff.net/2020/10/01/ingesting-xml-data-into-kafka-option-1-the-dirty-hack/&#34;&gt;first post&lt;/a&gt; how to hack together an ingestion pipeline for XML into Kafka using a source such as &lt;code&gt;curl&lt;/code&gt; piped through &lt;code&gt;xq&lt;/code&gt; to wrangle the XML and stream it into Kafka using &lt;code&gt;kafkacat&lt;/code&gt;, optionally using ksqlDB to apply and register a schema for it.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;The &lt;a href=&#34;https://rmoff.net/2020/10/01/ingesting-xml-data-into-kafka-option-2-kafka-connect-plus-single-message-transform/&#34;&gt;second one&lt;/a&gt; showed the use of any Kafka Connect source connector plus the &lt;code&gt;kafka-connect-transform-xml&lt;/code&gt; Single Message Transformation. Now we’re going to take a look at a source connector from the community that can also be used to ingest XML data into Kafka.&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Ingesting XML data into Kafka - Option 2: Kafka Connect plus Single Message Transform</title>
+      <link>https://rmoff.net/2020/10/01/ingesting-xml-data-into-kafka-option-2-kafka-connect-plus-single-message-transform/</link>
+      <pubDate>Thu, 01 Oct 2020 14:09:41 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2020/10/01/ingesting-xml-data-into-kafka-option-2-kafka-connect-plus-single-message-transform/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;We previously looked at the background to &lt;a href=&#34;https://rmoff.net/2020/10/01/ingesting-xml-data-into-kafka-introduction/&#34;&gt;getting XML into Kafka&lt;/a&gt;, and potentially &lt;a href=&#34;https://rmoff.net/2020/10/01/ingesting-xml-data-into-kafka-option-1-the-dirty-hack/&#34;&gt;how [not] to do it&lt;/a&gt;. Now let’s look at the &lt;em&gt;proper&lt;/em&gt; way to build a streaming ingestion pipeline for XML into Kafka, using Kafka Connect.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;If you’re unfamiliar with Kafka Connect, check out this &lt;a href=&#34;https://rmoff.dev/what-is-kafka-connect&#34;&gt;quick intro to Kafka Connect here&lt;/a&gt;. Kafka Connect’s excellent plugable architecture means that we can pair any &lt;strong&gt;source connector&lt;/strong&gt; to read XML from wherever we have it (for example, a flat file, or a MQ, or anywhere else), with a &lt;strong&gt;Single Message Transform&lt;/strong&gt; to transform the XML into a payload with a schema, and finally a &lt;strong&gt;converter&lt;/strong&gt; to serialise the data in a form that we would like to use such as Avro or Protobuf.&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>What is Kafka Connect?</title>
+      <link>https://rmoff.net/2020/09/11/what-is-kafka-connect/</link>
+      <pubDate>Fri, 11 Sep 2020 16:00:05 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2020/09/11/what-is-kafka-connect/</guid>
+      <description>&lt;p&gt;Kafka Connect is the integration API for Apache Kafka. Check out this video for an overview of what Kafka Connect enables you to do, and how to do it.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>How to install connector plugins in Kafka Connect</title>
+      <link>https://rmoff.net/2020/06/19/how-to-install-connector-plugins-in-kafka-connect/</link>
+      <pubDate>Fri, 19 Jun 2020 17:28:09 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2020/06/19/how-to-install-connector-plugins-in-kafka-connect/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;Kafka Connect (which is part of Apache Kafka) supports pluggable connectors, enabling you to stream data between Kafka and numerous types of system, including to mention just a few:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;ulist&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Databases&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Message Queues&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Flat files&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Object stores&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;The appropriate plugin for the technology which you want to integrate can be found on &lt;a href=&#34;https://www.confluent.io/hub/&#34;&gt;Confluent Hub&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Loading CSV data into Kafka</title>
+      <link>https://rmoff.net/2020/06/17/loading-csv-data-into-kafka/</link>
+      <pubDate>Wed, 17 Jun 2020 17:57:18 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2020/06/17/loading-csv-data-into-kafka/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;For whatever reason, CSV still exists as a ubiquitous data interchange format. It doesn’t get much simpler: chuck some plaintext with fields separated by commas into a file and stick &lt;code&gt;.csv&lt;/code&gt; on the end. If you’re feeling helpful you can include a header row with field names in.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;pre&gt;&lt;code class=&#34;language-csv&#34; data-lang=&#34;csv&#34;&gt;order_id,customer_id,order_total_usd,make,model,delivery_city,delivery_company,delivery_address
+1,535,190899.73,Dodge,Ram Wagon B350,Sheffield,DuBuque LLC,2810 Northland Avenue
+2,671,33245.53,Volkswagen,Cabriolet,Edinburgh,Bechtelar-VonRueden,1 Macpherson Crossing&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;In this article we’ll see how to load this CSV data into Kafka, without even needing to write any code&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Kafka Connect JDBC Sink - setting the key field name</title>
+      <link>https://rmoff.net/2020/02/25/kafka-connect-jdbc-sink-setting-the-key-field-name/</link>
+      <pubDate>Tue, 25 Feb 2020 14:37:12 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2020/02/25/kafka-connect-jdbc-sink-setting-the-key-field-name/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;I wanted to get some data from a Kafka topic:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;ksql&lt;span style=&#34;color:#666&#34;&gt;&amp;gt;&lt;/span&gt; PRINT PERSON_STATS &lt;span style=&#34;color:#008000;font-weight:bold&#34;&gt;FROM&lt;/span&gt; BEGINNING;
+&lt;span style=&#34;color:#008000;font-weight:bold&#34;&gt;Key&lt;/span&gt; format: KAFKA (STRING)
+Value format: AVRO
+rowtime: &lt;span style=&#34;color:#666&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;25&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;20&lt;/span&gt; &lt;span style=&#34;color:#666&#34;&gt;1&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;12&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;51&lt;/span&gt; PM UTC, &lt;span style=&#34;color:#008000;font-weight:bold&#34;&gt;key&lt;/span&gt;: robin, value: &lt;span style=&#34;&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#ba2121&#34;&gt;&amp;#34;PERSON&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ba2121&#34;&gt;&amp;#34;robin&amp;#34;&lt;/span&gt;,
+ &lt;span style=&#34;color:#ba2121&#34;&gt;&amp;#34;LOCATION_CHANGES&amp;#34;&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ba2121&#34;&gt;&amp;#34;UNIQUE_LOCATIONS&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#666&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;into Postgres, so did the easy thing and used Kafka Connect with the &lt;a href=&#34;https://docs.confluent.io/current/connect/kafka-connect-jdbc/sink-connector/index.html&#34;&gt;JDBC Sink connector&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Primitive Keys in ksqlDB</title>
+      <link>https://rmoff.net/2020/02/07/primitive-keys-in-ksqldb/</link>
+      <pubDate>Fri, 07 Feb 2020 10:58:06 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2020/02/07/primitive-keys-in-ksqldb/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;ksqlDB 0.7 will add support for message keys as primitive data types beyond just &lt;code&gt;STRING&lt;/code&gt; (which is all we’ve had to date). That means that Kafka messages are going to be much easier to work with, and require less wrangling to get into the form in which you need them. Take an example of a database table that you’ve ingested into a Kafka topic, and want to join to a stream of events. Previously you’d have had to take the Kafka topic into which the table had been ingested and run a ksqlDB processor to re-key the messages such that ksqlDB could join on them. &lt;em&gt;Friends, I am here to tell you that this is no longer needed!&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Notes on getting data into InfluxDB from Kafka with Kafka Connect</title>
+      <link>https://rmoff.net/2020/01/23/notes-on-getting-data-into-influxdb-from-kafka-with-kafka-connect/</link>
+      <pubDate>Thu, 23 Jan 2020 12:01:35 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2020/01/23/notes-on-getting-data-into-influxdb-from-kafka-with-kafka-connect/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;You can download the InfluxDB connector for Kafka Connect &lt;a href=&#34;https://www.confluent.io/hub/confluentinc/kafka-connect-influxdb&#34;&gt;here&lt;/a&gt;. Documentation for it is &lt;a href=&#34;https://docs.confluent.io/current/connect/kafka-connect-influxdb/influx-db-sink-connector/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;When a message from your source Kafka topic is written to InfluxDB the InfluxDB values are set thus:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;ulist&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Timestamp&lt;/strong&gt; is taken from the Kafka message timestamp (which is either set by your producer, or the time at which it was received by the broker)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Tag(s)&lt;/strong&gt; are taken from the &lt;code&gt;tags&lt;/code&gt; field in the message. This field must be a &lt;code&gt;map&lt;/code&gt; type - see below&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Value&lt;/strong&gt; fields are taken from the rest of the message, and must be numeric or boolean&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Measurement name&lt;/strong&gt; can be specified as a field of the message, or hardcoded in the connector config.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Kafka Connect and Schemas</title>
+      <link>https://rmoff.net/2020/01/22/kafka-connect-and-schemas/</link>
+      <pubDate>Wed, 22 Jan 2020 00:26:03 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2020/01/22/kafka-connect-and-schemas/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;Here’s a fun one that Kafka Connect can sometimes throw out:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;java.lang.ClassCastException: 
+java.util.HashMap cannot be cast to org.apache.kafka.connect.data.Struct&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;HashMap? Struct? HUH?&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Monitoring Sonos with ksqlDB, InfluxDB, and Grafana</title>
+      <link>https://rmoff.net/2020/01/21/monitoring-sonos-with-ksqldb-influxdb-and-grafana/</link>
+      <pubDate>Tue, 21 Jan 2020 22:47:35 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2020/01/21/monitoring-sonos-with-ksqldb-influxdb-and-grafana/</guid>
+      <description>I’m quite a fan of Sonos audio equipment but recently had some trouble with some of the devices glitching and even cutting out whilst playing. Under the covers Sonos stuff is running Linux (of course) and exposes some diagnostics through a rudimentary frontend that you can access at http://&amp;lt;sonos player IP&amp;gt;:1400/support/review:
+   Whilst this gives you the current state, you can’t get historical data on it. It felt like the problems were happening &amp;#34;all the time&amp;#34;, but were they actually?</description>
+    </item>
+    
+    <item>
+      <title>Changing the Logging Level for Kafka Connect Dynamically</title>
+      <link>https://rmoff.net/2020/01/16/changing-the-logging-level-for-kafka-connect-dynamically/</link>
+      <pubDate>Thu, 16 Jan 2020 22:50:45 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2020/01/16/changing-the-logging-level-for-kafka-connect-dynamically/</guid>
+      <description>Logs are magical things. They tell us what an application is doing—or not doing. They help us debug problems. As it happens, they also underpin the entire philosophy of Apache Kafka, but that’s a story for another day. Today we’re talking about logs written by Kafka Connect, and how we can change the amount of detail written.
+ By default, Kafka Connect will write logs at INFO and above. So when it starts up, the settings that it’s using, and any WARN or ERROR messages along the way - a missing configuration, a broken connector, and so on.</description>
+    </item>
+    
+    <item>
+      <title>Streaming messages from RabbitMQ into Kafka with Kafka Connect</title>
+      <link>https://rmoff.net/2020/01/08/streaming-messages-from-rabbitmq-into-kafka-with-kafka-connect/</link>
+      <pubDate>Wed, 08 Jan 2020 13:06:57 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2020/01/08/streaming-messages-from-rabbitmq-into-kafka-with-kafka-connect/</guid>
+      <description>This was prompted by a question on StackOverflow to which I thought the answer would be straightforward, but turned out not to be so. And then I got a bit carried away and ended up with a nice example of how you can handle schema-less data coming from a system such as RabbitMQ and apply a schema to it.
+   Note  This same pattern for ingesting bytes and applying a schema will work with other connectors such as MQTT     What?</description>
+    </item>
+    
+    <item>
+      <title>Analysing network behaviour with ksqlDB and MongoDB</title>
+      <link>https://rmoff.net/2019/12/20/analysing-network-behaviour-with-ksqldb-and-mongodb/</link>
+      <pubDate>Fri, 20 Dec 2019 17:23:40 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2019/12/20/analysing-network-behaviour-with-ksqldb-and-mongodb/</guid>
+      <description>In this post I want to build on my previous one and show another use of the Syslog data that I’m capturing. Instead of looking for SSH attacks, I’m going to analyse the behaviour of my networking components.
+   Note  You can find all the code to run this on GitHub.     Getting Syslog data into Kafka As before, let’s create ourselves a syslog connector in ksqlDB:</description>
+    </item>
+    
+    <item>
+      <title>Detecting and Analysing SSH Attacks with ksqlDB</title>
+      <link>https://rmoff.net/2019/12/18/detecting-and-analysing-ssh-attacks-with-ksqldb/</link>
+      <pubDate>Wed, 18 Dec 2019 17:23:40 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2019/12/18/detecting-and-analysing-ssh-attacks-with-ksqldb/</guid>
+      <description>I’ve written previously about ingesting Syslog into Kafka and using KSQL to analyse it. I want to revisit the subject since it’s nearly two years since I wrote about it and some things have changed since then.
+ ksqlDB now includes the ability to define connectors from within it, which makes setting things up loads easier.
+ You can find the full rig to run this on GitHub.
+ Create and configure the Syslog connector To start with, create a source connector:</description>
+    </item>
+    
+    <item>
+      <title>Kafka Connect - Request timed out</title>
+      <link>https://rmoff.net/2019/11/29/kafka-connect-request-timed-out/</link>
+      <pubDate>Fri, 29 Nov 2019 14:37:24 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2019/11/29/kafka-connect-request-timed-out/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;A short &amp;amp; sweet blog post to help people Googling for this error, and me next time I encounter it.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;The scenario: trying to create a connector in Kafka Connect (running in distributed mode, one worker) failed with the &lt;code&gt;curl&lt;/code&gt; response&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;HTTP/1.1 &lt;span style=&#34;color:#666&#34;&gt;500&lt;/span&gt; Internal Server Error
+Date: Fri, &lt;span style=&#34;color:#666&#34;&gt;29&lt;/span&gt; Nov &lt;span style=&#34;color:#666&#34;&gt;2019&lt;/span&gt; 14:33:53 GMT
+Content-Type: application/json
+Content-Length: &lt;span style=&#34;color:#666&#34;&gt;48&lt;/span&gt;
+Server: Jetty&lt;span style=&#34;color:#666&#34;&gt;(&lt;/span&gt;9.4.18.v20190429&lt;span style=&#34;color:#666&#34;&gt;)&lt;/span&gt;
+
+&lt;span style=&#34;color:#666&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#ba2121&#34;&gt;&amp;#34;error_code&amp;#34;&lt;/span&gt;:500,&lt;span style=&#34;color:#ba2121&#34;&gt;&amp;#34;message&amp;#34;&lt;/span&gt;:&lt;span style=&#34;color:#ba2121&#34;&gt;&amp;#34;Request timed out&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Common mistakes made when configuring multiple Kafka Connect workers</title>
+      <link>https://rmoff.net/2019/11/22/common-mistakes-made-when-configuring-multiple-kafka-connect-workers/</link>
+      <pubDate>Fri, 22 Nov 2019 11:33:48 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2019/11/22/common-mistakes-made-when-configuring-multiple-kafka-connect-workers/</guid>
+      <description>Kafka Connect can be deployed in two modes: Standalone or Distributed. You can learn more about them in my Kafka Summit London 2019 talk.
+ I usually recommend Distributed for several reasons:
+   It can scale
+  It is fault-tolerant
+  It can be run on a single node sandbox or a multi-node production environment
+  It is the same configuration method however you run it</description>
+    </item>
+    
+    <item>
+      <title>Streaming data from SQL Server to Kafka to Snowflake ❄️ with Kafka Connect</title>
+      <link>https://rmoff.net/2019/11/20/streaming-data-from-sql-server-to-kafka-to-snowflake-with-kafka-connect/</link>
+      <pubDate>Wed, 20 Nov 2019 17:59:50 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2019/11/20/streaming-data-from-sql-server-to-kafka-to-snowflake-with-kafka-connect/</guid>
+      <description>Snowflake is the data warehouse built for the cloud, so let’s get all ☁️ cloudy and stream some data from Kafka running in Confluent Cloud to Snowflake!
+ What I’m showing also works just as well for an on-premises Kafka cluster. I’m using SQL Server as an example data source, with Debezium to capture and stream and changes from it into Kafka.
+   I’m assuming that you’ve signed up for Confluent Cloud and Snowflake and are the proud owner of credentials for both.</description>
+    </item>
+    
+    <item>
+      <title>Running Dockerised Kafka Connect worker on GCP</title>
+      <link>https://rmoff.net/2019/11/12/running-dockerised-kafka-connect-worker-on-gcp/</link>
+      <pubDate>Tue, 12 Nov 2019 14:45:43 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2019/11/12/running-dockerised-kafka-connect-worker-on-gcp/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;I &lt;a href=&#34;http://talks.rmoff.net/&#34;&gt;talk and write about Kafka and Confluent Platform&lt;/a&gt; a lot, and more and more of the demos that I’m building are around &lt;a href=&#34;https://confluent.cloud&#34;&gt;Confluent Cloud&lt;/a&gt;. This means that I don’t have to run or manage my own Kafka brokers, Zookeeper, Schema Registry, KSQL servers, etc which makes things a ton easier. Whilst there are managed connectors on Confluent Cloud (S3 etc), I need to run my own Kafka Connect worker for those connectors not yet provided. An example is the MQTT source connector that I use in &lt;a href=&#34;https://rmoff.dev/kssf19-ksql-video&#34;&gt;this demo&lt;/a&gt;. Up until now I’d either run this worker locally, or manually build a cloud VM. Locally is fine, as it’s all Docker, easily spun up in a single &lt;code&gt;docker-compose up -d&lt;/code&gt; command. I wanted something that would keep running whilst my laptop was off, but that was as close to my local build as possible—enter GCP and its functionality to run a container on a VM automagically.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;strong&gt;You can see &lt;a href=&#34;https://github.com/confluentinc/demo-scene/blob/master/mqtt-tracker/launch-worker-container_gcloud.sh&#34;&gt;the full script here&lt;/a&gt;&lt;/strong&gt;. The rest of this article just walks through the how and why.&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Using Kafka Connect and Debezium with Confluent Cloud</title>
+      <link>https://rmoff.net/2019/10/16/using-kafka-connect-and-debezium-with-confluent-cloud/</link>
+      <pubDate>Wed, 16 Oct 2019 16:29:34 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2019/10/16/using-kafka-connect-and-debezium-with-confluent-cloud/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;This is based on using &lt;a href=&#34;https://confluent.cloud&#34;&gt;Confluent Cloud&lt;/a&gt; to provide your managed Kafka and Schema Registry. All that you run yourself is the Kafka Connect worker.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;Optionally, you can use this &lt;a href=&#34;https://github.com/rmoff/debezium-ccloud/blob/master/docker-compose.yml&#34;&gt;Docker Compose&lt;/a&gt; to run the worker and a sample MySQL database.&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Skipping bad records with the Kafka Connect JDBC sink connector</title>
+      <link>https://rmoff.net/2019/10/15/skipping-bad-records-with-the-kafka-connect-jdbc-sink-connector/</link>
+      <pubDate>Tue, 15 Oct 2019 09:58:38 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2019/10/15/skipping-bad-records-with-the-kafka-connect-jdbc-sink-connector/</guid>
+      <description>&lt;div id=&#34;preamble&#34;&gt;
+&lt;div class=&#34;sectionbody&#34;&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;The Kafka Connect framework provides generic &lt;a href=&#34;https://www.confluent.io/blog/kafka-connect-deep-dive-error-handling-dead-letter-queues&#34;&gt;error handling and dead-letter queue capabilities&lt;/a&gt; which are available for problems with [de]serialisation and Single Message Transforms. When it comes to errors that a connector may encounter doing the actual &lt;code&gt;pull&lt;/code&gt; or &lt;code&gt;put&lt;/code&gt; of data from the source/target system, it’s down to the connector itself to implement logic around that. For example, the Elasticsearch sink connector provides configuration (&lt;code&gt;behavior.on.malformed.documents&lt;/code&gt;) that can be set so that a single bad record won’t halt the pipeline. Others, such as the JDBC Sink connector, don’t provide this &lt;a href=&#34;https://github.com/confluentinc/kafka-connect-jdbc/issues/721&#34;&gt;yet&lt;/a&gt;. That means that if you hit this problem, you need to manually unblock it yourself. One way is to manually move the offset of the consumer on past the bad message.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;strong&gt;TL;DR&lt;/strong&gt; : You can use &lt;code&gt;kafka-consumer-groups --reset-offsets --to-offset &amp;lt;x&amp;gt;&lt;/code&gt; to manually move the connector past a bad message&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Kafka Connect and Elasticsearch</title>
+      <link>https://rmoff.net/2019/10/07/kafka-connect-and-elasticsearch/</link>
+      <pubDate>Mon, 07 Oct 2019 15:44:59 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2019/10/07/kafka-connect-and-elasticsearch/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;I use the Elastic stack for a lot of my &lt;a href=&#34;https://talks.rmoff.net/&#34;&gt;talks&lt;/a&gt; and &lt;a href=&#34;https://github.com/confluentinc/demo-scene/&#34;&gt;demos&lt;/a&gt; because it complements Kafka brilliantly. A few things have changed in recent releases and this blog is a quick note on some of the errors that you might hit and how to resolve them. It was inspired by a lot of the comments and discussion &lt;a href=&#34;https://github.com/confluentinc/kafka-connect-elasticsearch/issues/314&#34;&gt;here&lt;/a&gt; and &lt;a href=&#34;https://github.com/confluentinc/kafka-connect-elasticsearch/issues/342&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Reset Kafka Connect Source Connector Offsets</title>
+      <link>https://rmoff.net/2019/08/15/reset-kafka-connect-source-connector-offsets/</link>
+      <pubDate>Thu, 15 Aug 2019 10:42:34 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2019/08/15/reset-kafka-connect-source-connector-offsets/</guid>
+      <description>Kafka Connect in distributed mode uses Kafka itself to persist the offsets of any source connectors. This is a great way to do things as it means that you can easily add more workers, rebuild existing ones, etc without having to worry about where the state is persisted. I personally always recommend using distributed mode, even if just for a single worker instance - it just makes things easier, and more standard.</description>
+    </item>
+    
+    <item>
+      <title>Starting a Kafka Connect sink connector at the end of a topic</title>
+      <link>https://rmoff.net/2019/08/09/starting-a-kafka-connect-sink-connector-at-the-end-of-a-topic/</link>
+      <pubDate>Fri, 09 Aug 2019 17:11:06 +0200</pubDate>
+      
+      <guid>https://rmoff.net/2019/08/09/starting-a-kafka-connect-sink-connector-at-the-end-of-a-topic/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;When you create a sink connector in Kafka Connect, by default it will start reading from the beginning of the topic and stream all of the existing—and new—data to the target. The setting that controls this behaviour is &lt;code&gt;auto.offset.reset&lt;/code&gt;, and you can see its value in the worker log when the connector runs:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;color:#666&#34;&gt;[&lt;/span&gt;2019-08-05 23:31:35,405&lt;span style=&#34;color:#666&#34;&gt;]&lt;/span&gt; INFO ConsumerConfig values:
+        allow.auto.create.topics &lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#008000&#34;&gt;true&lt;/span&gt;
+        auto.commit.interval.ms &lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#666&#34;&gt;5000&lt;/span&gt;
+        auto.offset.reset &lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt; earliest
+…&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Resetting a Consumer Group in Kafka</title>
+      <link>https://rmoff.net/2019/08/09/resetting-a-consumer-group-in-kafka/</link>
+      <pubDate>Fri, 09 Aug 2019 16:32:46 +0200</pubDate>
+      
+      <guid>https://rmoff.net/2019/08/09/resetting-a-consumer-group-in-kafka/</guid>
+      <description>I’ve been using Replicator as a powerful way to copy data from my Kafka rig at home onto my laptop’s Kafka environment. It means that when I’m on the road I can continue to work with the same set of data and develop pipelines etc. With a VPN back home I can even keep them in sync directly if I want to.
+ I hit a problem the other day where Replicator was running, but I had no data in my target topics on my laptop.</description>
+    </item>
+    
+    <item>
+      <title>Manually delete a connector from Kafka Connect</title>
+      <link>https://rmoff.net/2019/06/23/manually-delete-a-connector-from-kafka-connect/</link>
+      <pubDate>Sun, 23 Jun 2019 11:39:46 +0200</pubDate>
+      
+      <guid>https://rmoff.net/2019/06/23/manually-delete-a-connector-from-kafka-connect/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;Kafka Connect has as &lt;a href=&#34;https://docs.confluent.io/current/connect/references/restapi.html&#34;&gt;REST API&lt;/a&gt; through which all config should be done, including removing connectors that have been created. Sometimes though, you might have reason to want to manually do this—and since Kafka Connect running in distributed mode uses Kafka as its persistent data store, you can achieve this by manually writing to the topic yourself.&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Automatically restarting failed Kafka Connect tasks</title>
+      <link>https://rmoff.net/2019/06/06/automatically-restarting-failed-kafka-connect-tasks/</link>
+      <pubDate>Thu, 06 Jun 2019 17:51:44 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2019/06/06/automatically-restarting-failed-kafka-connect-tasks/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;Here’s a hacky way to automatically restart Kafka Connect connectors if they fail. Restarting automatically only makes sense if it’s a transient failure; if there’s a problem with your pipeline (e.g. bad records or a mis-configured server) then you don’t gain anything from this. You might want to check out &lt;a href=&#34;https://www.confluent.io/blog/kafka-connect-deep-dive-error-handling-dead-letter-queues&#34;&gt;Kafka Connect’s error handling and dead letter queues&lt;/a&gt; too.&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Putting Kafka Connect passwords in a separate file / externalising secrets</title>
+      <link>https://rmoff.net/2019/05/24/putting-kafka-connect-passwords-in-a-separate-file-/-externalising-secrets/</link>
+      <pubDate>Fri, 24 May 2019 17:30:57 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2019/05/24/putting-kafka-connect-passwords-in-a-separate-file-/-externalising-secrets/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;Kafka Connect configuration is easy - you just write some JSON! But what if you’ve got credentials that you need to pass? Embedding those in a config file is not always such a smart idea. Fortunately with &lt;a href=&#34;https://cwiki.apache.org/confluence/display/KAFKA/KIP-297%3A+Externalizing+Secrets+for+Connect+Configurations&#34;&gt;KIP-297&lt;/a&gt; which was released in Apache Kafka 2.0 there is support for external secrets. It’s extendable to use your own &lt;code&gt;ConfigProvider&lt;/code&gt;, and ships with its own for just putting credentials in a file - which I’ll show here. You can &lt;a href=&#34;https://docs.confluent.io/current/connect/security.html#externalizing-secrets&#34;&gt;read more here&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Deleting a Connector in Kafka Connect without the REST API</title>
+      <link>https://rmoff.net/2019/05/22/deleting-a-connector-in-kafka-connect-without-the-rest-api/</link>
+      <pubDate>Wed, 22 May 2019 10:32:10 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2019/05/22/deleting-a-connector-in-kafka-connect-without-the-rest-api/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;Kafka Connect exposes a &lt;a href=&#34;https://docs.confluent.io/current/connect/references/restapi.html&#34;&gt;REST interface&lt;/a&gt; through which all config and monitoring operations can be done. You can create connectors, delete them, restart them, check their status, and so on. But, I found a situation recently in which I needed to delete a connector and couldn’t do so with the REST API. Here’s another way to do it, by amending the configuration Kafka topic that Kafka Connect in distributed mode uses to persist configuration information for connectors. Note that this is not a recommended way of working with Kafka Connect—the REST API is there for a good reason :)&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>When a Kafka Connect converter is not a _converter_</title>
+      <link>https://rmoff.net/2019/05/08/when-a-kafka-connect-converter-is-not-a-_converter_/</link>
+      <pubDate>Wed, 08 May 2019 10:06:50 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2019/05/08/when-a-kafka-connect-converter-is-not-a-_converter_/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;Kafka Connect is a API within Apache Kafka and its modular nature makes it powerful and flexible. Converters are part of the API but not always fully understood. I’ve written previously about &lt;a href=&#34;https://www.confluent.io/blog/kafka-connect-deep-dive-converters-serialization-explained&#34;&gt;Kafka Connect converters&lt;/a&gt;, and this post is just a hands-on example to show even further what they are—and are not—about.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;admonitionblock note&#34;&gt;
+&lt;table&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td class=&#34;icon&#34;&gt;
+&lt;div class=&#34;title&#34;&gt;Note&lt;/div&gt;
+&lt;/td&gt;
+&lt;td class=&#34;content&#34;&gt;
+To understand more about Kafka Connect in general, check out my talk from Kafka Summit London &lt;a href=&#34;https://talks.rmoff.net/QZ5nsS/from-zero-to-hero-with-kafka-connect&#34;&gt;&lt;em&gt;From Zero to Hero with Kafka Connect&lt;/em&gt;&lt;/a&gt;.
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Reading Kafka Connect Offsets via the REST Proxy</title>
+      <link>https://rmoff.net/2019/05/02/reading-kafka-connect-offsets-via-the-rest-proxy/</link>
+      <pubDate>Thu, 02 May 2019 10:58:27 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2019/05/02/reading-kafka-connect-offsets-via-the-rest-proxy/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;When you run Kafka Connect in distributed mode it uses a Kafka topic to store the offset information for each connector. Because it’s just a Kafka topic, you can read that information using any consumer.&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Kafka Connect Change Log Level and Write Log to File</title>
+      <link>https://rmoff.net/2019/01/29/kafka-connect-change-log-level-and-write-log-to-file/</link>
+      <pubDate>Tue, 29 Jan 2019 11:15:01 -0800</pubDate>
+      
+      <guid>https://rmoff.net/2019/01/29/kafka-connect-change-log-level-and-write-log-to-file/</guid>
+      <description>By default Kafka Connect sends its output to stdout, so you’ll see it on the console, Docker logs, or wherever. Sometimes you might want to route it to file, and you can do this by reconfiguring log4j. You can also change the configuration to get more (or less) detail in the logs by changing the log level.
+ Finding the log configuration file The configuration file is called connect-log4j.properties and usually found in etc/kafka/connect-log4j.</description>
+    </item>
+    
+    <item>
+      <title>Docker Tips and Tricks with Kafka Connect, ksqlDB, and Kafka</title>
+      <link>https://rmoff.net/2018/12/15/docker-tips-and-tricks-with-kafka-connect-ksqldb-and-kafka/</link>
+      <pubDate>Sat, 15 Dec 2018 22:00:55 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2018/12/15/docker-tips-and-tricks-with-kafka-connect-ksqldb-and-kafka/</guid>
+      <description>A few years ago a colleague of mine told me about this thing called Docker, and I must admit I dismissed it as a fad…how wrong was I. Docker, and Docker Compose, are one of my key tools of the trade. With them I can build self-contained environments for tutorials, demos, conference talks etc. Tear it down, run it again, without worrying that somewhere a local config changed and will break things.</description>
+    </item>
+    
+    <item>
+      <title>Kafka Connect CLI tricks</title>
+      <link>https://rmoff.net/2018/12/03/kafka-connect-cli-tricks/</link>
+      <pubDate>Mon, 03 Dec 2018 14:50:45 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2018/12/03/kafka-connect-cli-tricks/</guid>
+      <description>I do lots of work with Kafka Connect, almost entirely in Distributed mode—even just with 1 node -&amp;gt; makes scaling out much easier when/if needed. Because I&amp;rsquo;m using Distributed mode, I use the Kafka Connect REST API to configure and manage it. Whilst others might use GUI REST tools like Postman etc, I tend to just use the commandline. Here are some useful snippets that I use all the time.</description>
+    </item>
+    
+    <item>
+      <title>Kafka Connect and Oracle data types</title>
+      <link>https://rmoff.net/2018/05/21/kafka-connect-and-oracle-data-types/</link>
+      <pubDate>Mon, 21 May 2018 08:59:00 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2018/05/21/kafka-connect-and-oracle-data-types/</guid>
+      <description>The Kafka Connect JDBC Connector by default does not cope so well with:
+ NUMBER columns with no defined precision/scale. You may end up with apparent junk (bytes) in the output, or just errors. TIMESTAMP WITH LOCAL TIME ZONE. Throws JDBC type -102 not currently supported warning in the log.  Read more about NUMBER data type in the Oracle docs.
+tl;dr : How do I make it work? There are several options:</description>
+    </item>
+    
+    <item>
+      <title>Streaming Data from MongoDB into Kafka with Kafka Connect and Debezium</title>
+      <link>https://rmoff.net/2018/03/27/streaming-data-from-mongodb-into-kafka-with-kafka-connect-and-debezium/</link>
+      <pubDate>Tue, 27 Mar 2018 18:52:00 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2018/03/27/streaming-data-from-mongodb-into-kafka-with-kafka-connect-and-debezium/</guid>
+      <description>Disclaimer: I am not a MongoDB person. These steps may or may not be appropriate and proper. But they worked for me :) Feel free to post in comments if I&amp;rsquo;m doing something wrong
+MongoDB config - enabling replica sets For Debezium to be able to stream changes from MongoDB, Mongo needs to have replication configured:
+Docs: Replication / Convert a Standalone to a Replica Set
+Stop Mongo:
+rmoff@proxmox01 ~&amp;gt; sudo service mongod stop Add replica set config to /etc/mongod.</description>
+    </item>
+    
+    <item>
+      <title>Streaming Data from MySQL into Kafka with Kafka Connect and Debezium</title>
+      <link>https://rmoff.net/2018/03/24/streaming-data-from-mysql-into-kafka-with-kafka-connect-and-debezium/</link>
+      <pubDate>Sat, 24 Mar 2018 14:58:14 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2018/03/24/streaming-data-from-mysql-into-kafka-with-kafka-connect-and-debezium/</guid>
+      <description>Debezium is a CDC tool that can stream changes from MySQL, MongoDB, and PostgreSQL into Kafka, using Kafka Connect. In this article we&amp;rsquo;ll see how to set it up and examine the format of the data. A subsequent article will show using this realtime stream of data from a RDBMS and join it to data originating from other sources, using KSQL.
+The software versions used here are:
+ Confluent Platform 4.</description>
+    </item>
+    
+    <item>
+      <title>Streaming data from Kafka into Elasticsearch</title>
+      <link>https://rmoff.net/2018/03/06/streaming-data-from-kafka-into-elasticsearch/</link>
+      <pubDate>Tue, 06 Mar 2018 22:21:00 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2018/03/06/streaming-data-from-kafka-into-elasticsearch/</guid>
+      <description>This article is part of a series exploring Streaming ETL in practice. You can read about setting up the ingest of realtime events from a standard Oracle platform, and building streaming ETL using KSQL.
+ This post shows how we take data streaming in from an Oracle transactional system into Kafka, and simply stream it onwards into Elasticsearch. This is a common pattern, for enabling rapid search or analytics against data held in systems elsewhere.</description>
+    </item>
+    
+    <item>
+      <title>Oracle GoldenGate / Kafka Connect Handler troubleshooting</title>
+      <link>https://rmoff.net/2017/09/12/oracle-goldengate-/-kafka-connect-handler-troubleshooting/</link>
+      <pubDate>Tue, 12 Sep 2017 21:55:16 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2017/09/12/oracle-goldengate-/-kafka-connect-handler-troubleshooting/</guid>
+      <description>The Replicat was kapput:
+GGSCI (localhost.localdomain) 3&amp;gt; info rkconnoe REPLICAT RKCONNOE Last Started 2017-09-12 17:06 Status ABENDED Checkpoint Lag 00:00:00 (updated 00:46:34 ago) Log Read Checkpoint File /u01/app/ogg/dirdat/oe000000 First Record RBA 0 So checking the OGG error log ggserr.log showed
+2017-09-12T17:06:17.572-0400 ERROR OGG-15051 Oracle GoldenGate Delivery, rkconnoe.prm: Java or JNI exception: oracle.goldengate.util.GGException: Error detected handling operation added event. 2017-09-12T17:06:17.572-0400 ERROR OGG-01668 Oracle GoldenGate Delivery, rkconnoe.prm: PROCESS ABENDING. So checking the replicat log dirrpt/RKCONNOE_info_log4j.</description>
+    </item>
+    
+    <item>
+      <title>Kafka Connect - JsonDeserializer with schemas.enable requires &#34;schema&#34; and &#34;payload&#34; fields</title>
+      <link>https://rmoff.net/2017/09/06/kafka-connect-jsondeserializer-with-schemas.enable-requires-schema-and-payload-fields/</link>
+      <pubDate>Wed, 06 Sep 2017 12:00:25 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2017/09/06/kafka-connect-jsondeserializer-with-schemas.enable-requires-schema-and-payload-fields/</guid>
+      <description>An error that I see coming up frequently in the Kafka Connect community (e.g. mailing list, Slack group, StackOverflow) is:
+JsonDeserializer with schemas.enable requires &amp;quot;schema&amp;quot; and &amp;quot;payload&amp;quot; fields and may not contain additional fields  or
+No fields found using key and value schemas for table: foo-bar  You can see an explanation, and solution, for the issue in my StackOverflow answer here: https://stackoverflow.com/a/45940013/350613
+If you&amp;rsquo;re using schemas.enable in the Connector configuration, you must have schema and payload as the root-level elements of your JSON message ( Which is pretty much verbatim what the error says 😁), like this:</description>
+    </item>
+    
+    <item>
+      <title>Configuring Kafka Connect to log REST HTTP messages to a separate file</title>
+      <link>https://rmoff.net/2017/06/12/configuring-kafka-connect-to-log-rest-http-messages-to-a-separate-file/</link>
+      <pubDate>Mon, 12 Jun 2017 15:28:15 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2017/06/12/configuring-kafka-connect-to-log-rest-http-messages-to-a-separate-file/</guid>
+      <description>Kafka&amp;rsquo;s Connect API is a wondrous way of easily bringing data in and out of Apache Kafka without having to write a line of code. By choosing a Connector from the many available, it&amp;rsquo;s possible to set up and end-to-end data pipeline with just a few lines of configuration. You can configure this by hand, or you can use the Confluent Control Center, for both management and monitoring:
+BUT &amp;hellip; there are times when not all goes well - perhaps your source has gone offline, or one of your targets has been misconfigured.</description>
+    </item>
+    
+    <item>
+      <title>Oracle GoldenGate -&gt; Kafka Connect - &#34;Failed to serialize Avro data&#34;</title>
+      <link>https://rmoff.net/2016/11/29/oracle-goldengate-kafka-connect-failed-to-serialize-avro-data/</link>
+      <pubDate>Tue, 29 Nov 2016 22:04:38 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2016/11/29/oracle-goldengate-kafka-connect-failed-to-serialize-avro-data/</guid>
+      <description>tl;dr Make sure that key.converter.schema.registry.url and value.converter.schema.registry.url are specified, and that there are no trailing whitespaces.
+ I&amp;rsquo;ve been building on previous work I&amp;rsquo;ve done with Oracle GoldenGate and Kafka Connect, looking at how to have the change records from the Oracle database come through to Kafka in Avro format rather than the default JSON that the sample configuration gives.
+Simply changing the Kafka Connect OGG configuration file (confluent.properties) from</description>
+    </item>
+    
+    <item>
+      <title>Kafka Connect - java.lang.IncompatibleClassChangeError</title>
+      <link>https://rmoff.net/2016/11/24/kafka-connect-java.lang.incompatibleclasschangeerror/</link>
+      <pubDate>Thu, 24 Nov 2016 20:58:44 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2016/11/24/kafka-connect-java.lang.incompatibleclasschangeerror/</guid>
+      <description>I hit this error running Kafka Connect HDFS connector from Confluent Platform v3.1.1 on BigDataLite 4.6:
+[oracle@bigdatalite ~]$ connect-standalone /etc/schema-registry/connect-avro-standalone.properties /etc/kafka-connect-hdfs/quickstart-hdfs.properties [...] Exception in thread &amp;quot;main&amp;quot; java.lang.IncompatibleClassChangeError: Implementing class at java.lang.ClassLoader.defineClass1(Native Method) at java.lang.ClassLoader.defineClass(ClassLoader.java:763) at java.security.SecureClassLoader.defineClass(SecureClassLoader.java:142) at java.net.URLClassLoader.defineClass(URLClassLoader.java:467) at java.net.URLClassLoader.access$100(URLClassLoader.java:73) at java.net.URLClassLoader$1.run(URLClassLoader.java:368) at java.net.URLClassLoader$1.run(URLClassLoader.java:362) at java.security.AccessController.doPrivileged(Native Method) at java.net.URLClassLoader.findClass(URLClassLoader.java:361) at java.lang.ClassLoader.loadClass(ClassLoader.java:424) at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331) at java.lang.ClassLoader.loadClass(ClassLoader.java:357) at java.lang.ClassLoader.defineClass1(Native Method) at java.lang.ClassLoader.defineClass(ClassLoader.java:763) The fix was to unset the CLASSPATH first:
+unset CLASSPATH  </description>
+    </item>
+    
+    <item>
+      <title>Kafka Connect JDBC - Oracle - Number of groups must be positive</title>
+      <link>https://rmoff.net/2016/07/27/kafka-connect-jdbc-oracle-number-of-groups-must-be-positive/</link>
+      <pubDate>Wed, 27 Jul 2016 15:23:14 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2016/07/27/kafka-connect-jdbc-oracle-number-of-groups-must-be-positive/</guid>
+      <description>There are various reasons for this error, but the one I hit was that the table name is case sensitive, and returned from Oracle by the JDBC driver in uppercase.
+If you specify the tablename in your connecter config in lowercase, it won&amp;rsquo;t be matched, and this error is thrown. You can validate this by setting debug logging (edit etc/kafka/connect-log4j.properties to set log4j.rootLogger=DEBUG, stdout), and observe: (I&amp;rsquo;ve truncated some of the output for legibility)</description>
+    </item>
+    
+    <item>
+      <title>Kafka Connect - HDFS with Hive Integration - SchemaProjectorException - Schema version required</title>
+      <link>https://rmoff.net/2016/07/19/kafka-connect-hdfs-with-hive-integration-schemaprojectorexception-schema-version-required/</link>
+      <pubDate>Tue, 19 Jul 2016 14:36:52 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2016/07/19/kafka-connect-hdfs-with-hive-integration-schemaprojectorexception-schema-version-required/</guid>
+      <description>I&amp;rsquo;ve been doing some noodling around with Confluent&amp;rsquo;s Kafka Connect recently, as part of gaining a wider understanding into Kafka. If you&amp;rsquo;re not familiar with Kafka Connect this page gives a good idea of the thinking behind it.
+One issue that I hit defeated my Google-fu so I&amp;rsquo;m recording it here to hopefully help out fellow n00bs.
+The pipeline that I&amp;rsquo;d set up looked like this:
+ Eneco&amp;rsquo;s Twitter Source streaming tweets to a Kafka topic Confluent&amp;rsquo;s HDFS Sink to stream tweets to HDFS and define Hive table automagically over them  It worked great, but only if I didn&amp;rsquo;t enable the Hive integration part.</description>
+    </item>
+    
+  </channel>
+</rss>

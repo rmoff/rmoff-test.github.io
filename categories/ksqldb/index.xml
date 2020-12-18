@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ksqlDB on rmoff&#39;s random ramblings</title>
+    <link>https://rmoff.net/categories/ksqldb/</link>
+    <description>Recent content in ksqlDB on rmoff&#39;s random ramblings</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 03 Nov 2020 17:14:33 +0000</lastBuildDate><atom:link href="https://rmoff.net/categories/ksqldb/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>📌    🎁 A collection of Kafka-related talks 💝</title>
+      <link>https://rmoff.net/2020/09/23/a-collection-of-kafka-related-talks/</link>
+      <pubDate>Wed, 23 Sep 2020 15:00:05 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2020/09/23/a-collection-of-kafka-related-talks/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;Here’s a collection of Kafka-related talks, &lt;em&gt;just for you.&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;Each one has 🍿🎥 a recording, 📔 slides, and 👾 code to go and try out. &lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Kafka Connect, ksqlDB, and Kafka Tombstone messages</title>
+      <link>https://rmoff.net/2020/11/03/kafka-connect-ksqldb-and-kafka-tombstone-messages/</link>
+      <pubDate>Tue, 03 Nov 2020 17:14:33 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2020/11/03/kafka-connect-ksqldb-and-kafka-tombstone-messages/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;As you may already realise, Kafka is not just a fancy message bus, or a pipe for big data. It’s an event streaming platform! If this is news to you, I’ll wait here whilst you &lt;a href=&#34;https://www.confluent.io/learn/kafka-tutorial/&#34;&gt;read this&lt;/a&gt; or &lt;a href=&#34;https://rmoff.dev/kafka101&#34;&gt;watch this&lt;/a&gt;…&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Streaming Geopoint data from Kafka to Elasticsearch</title>
+      <link>https://rmoff.net/2020/11/03/streaming-geopoint-data-from-kafka-to-elasticsearch/</link>
+      <pubDate>Tue, 03 Nov 2020 10:36:18 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2020/11/03/streaming-geopoint-data-from-kafka-to-elasticsearch/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;Streaming data from Kafka to Elasticsearch is easy with Kafka Connect - you can see how in this &lt;a href=&#34;https://rmoff.dev/kafka-elasticsearch&#34;&gt;tutorial&lt;/a&gt; and &lt;a href=&#34;https://rmoff.dev/kafka-elasticsearch-video&#34;&gt;video&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;One of the things that sometimes causes issues though is how to get location data correctly indexed into Elasticsearch as &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-point.html&#34;&gt;&lt;code&gt;geo_point&lt;/code&gt;&lt;/a&gt; fields to enable all that lovely location analysis. Unlike data types like dates and numerics, Elasticsearch’s &lt;a href=&#34;https://www.elastic.co/guide/en/elasticsearch/reference/current/dynamic-field-mapping.html&#34;&gt;Dynamic Field Mapping&lt;/a&gt; won’t automagically pick up &lt;code&gt;geo_point&lt;/code&gt; data, and so you have to do two things:&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>ksqlDB - How to model a variable number of fields in a nested value (`STRUCT`)</title>
+      <link>https://rmoff.net/2020/10/07/ksqldb-how-to-model-a-variable-number-of-fields-in-a-nested-value-struct/</link>
+      <pubDate>Wed, 07 Oct 2020 11:44:51 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2020/10/07/ksqldb-how-to-model-a-variable-number-of-fields-in-a-nested-value-struct/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;There was a &lt;a href=&#34;https://stackoverflow.com/questions/64241285/kafka-topic-with-variable-nested-json-object-as-ksql-db-stream/64242383#64242383&#34;&gt;good question on StackOverflow&lt;/a&gt; recently in which someone was struggling to find the appropriate ksqlDB DDL to model a source topic in which there was a variable number of fields in a &lt;code&gt;STRUCT&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Using the Debezium MS SQL connector with ksqlDB embedded Kafka Connect</title>
+      <link>https://rmoff.net/2020/09/18/using-the-debezium-ms-sql-connector-with-ksqldb-embedded-kafka-connect/</link>
+      <pubDate>Fri, 18 Sep 2020 10:00:05 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2020/09/18/using-the-debezium-ms-sql-connector-with-ksqldb-embedded-kafka-connect/</guid>
+      <description>Prompted by a question on StackOverflow I thought I’d take a quick look at setting up ksqlDB to ingest CDC events from Microsoft SQL Server using Debezium. Some of this is based on my previous article, Streaming data from SQL Server to Kafka to Snowflake ❄️ with Kafka Connect.
+ Setting up the Docker Compose I like standalone, repeatable, demo code. For that reason I love using Docker Compose and I embed everything in there - connector installation, the kitchen sink - the works.</description>
+    </item>
+    
+    <item>
+      <title>Counting the number of messages in a Kafka topic</title>
+      <link>https://rmoff.net/2020/09/08/counting-the-number-of-messages-in-a-kafka-topic/</link>
+      <pubDate>Tue, 08 Sep 2020 10:00:05 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2020/09/08/counting-the-number-of-messages-in-a-kafka-topic/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;There’s ways, and then there’s ways, to count the number of records/events/messages in a Kafka topic. Most of them are potentially inaccurate, or inefficient, or both. Here’s one that falls into the &lt;em&gt;potentially inefficient&lt;/em&gt; category, using &lt;code&gt;kafkacat&lt;/code&gt; to read all the messages and pipe to &lt;code&gt;wc&lt;/code&gt; which with the &lt;code&gt;-l&lt;/code&gt; will tell you how many lines there are, and since each message is a line, how many messages you have in the Kafka topic:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;listingblock&#34;&gt;
+&lt;div class=&#34;content&#34;&gt;
+&lt;pre class=&#34;rouge highlight&#34; style=&#34;background-color: #f8f8f8&#34;&gt;&lt;code data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color: #008080&#34;&gt;$ &lt;/span&gt;kafkacat &lt;span style=&#34;color: #000080&#34;&gt;-b&lt;/span&gt; broker:29092 &lt;span style=&#34;color: #000080&#34;&gt;-t&lt;/span&gt; mytestopic &lt;span style=&#34;color: #000080&#34;&gt;-C&lt;/span&gt; &lt;span style=&#34;color: #000080&#34;&gt;-e&lt;/span&gt; &lt;span style=&#34;color: #000080&#34;&gt;-q&lt;/span&gt;| &lt;span style=&#34;color: #0086B3&#34;&gt;wc&lt;/span&gt; &lt;span style=&#34;color: #000080&#34;&gt;-l&lt;/span&gt;
+       3&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>🤖Building a Telegram bot with Apache Kafka, Go, and ksqlDB</title>
+      <link>https://rmoff.net/2020/08/20/building-a-telegram-bot-with-apache-kafka-go-and-ksqldb/</link>
+      <pubDate>Thu, 20 Aug 2020 10:00:05 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2020/08/20/building-a-telegram-bot-with-apache-kafka-go-and-ksqldb/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;I had the pleasure of presenting at &lt;a href=&#34;https://dataengconf.com.au/&#34;&gt;DataEngBytes&lt;/a&gt; recently, and am delighted to share with you the &lt;strong&gt;🗒️ slides, 👾 code, and 🎥 recording&lt;/strong&gt; of my ✨brand new talk✨:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://rmoff.dev/carpark-telegram-bot&#34;&gt;🤖Building a Telegram bot with Apache Kafka, Go, and ksqlDB&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Learning Golang (some rough notes) - S02E09 - Processing chunked responses before EOF is reached</title>
+      <link>https://rmoff.net/2020/07/23/learning-golang-some-rough-notes-s02e09-processing-chunked-responses-before-eof-is-reached/</link>
+      <pubDate>Thu, 23 Jul 2020 10:00:05 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2020/07/23/learning-golang-some-rough-notes-s02e09-processing-chunked-responses-before-eof-is-reached/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;The server sends &lt;code&gt;Transfer-Encoding: chunked&lt;/code&gt; data, and you want to work with the data &lt;strong&gt;as you get it&lt;/strong&gt;, instead of waiting for the server to finish, the EOF to fire, and &lt;em&gt;then&lt;/em&gt; process the data?&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Loading CSV data into Kafka</title>
+      <link>https://rmoff.net/2020/06/17/loading-csv-data-into-kafka/</link>
+      <pubDate>Wed, 17 Jun 2020 17:57:18 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2020/06/17/loading-csv-data-into-kafka/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;For whatever reason, CSV still exists as a ubiquitous data interchange format. It doesn’t get much simpler: chuck some plaintext with fields separated by commas into a file and stick &lt;code&gt;.csv&lt;/code&gt; on the end. If you’re feeling helpful you can include a header row with field names in.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;pre&gt;&lt;code class=&#34;language-csv&#34; data-lang=&#34;csv&#34;&gt;order_id,customer_id,order_total_usd,make,model,delivery_city,delivery_company,delivery_address
+1,535,190899.73,Dodge,Ram Wagon B350,Sheffield,DuBuque LLC,2810 Northland Avenue
+2,671,33245.53,Volkswagen,Cabriolet,Edinburgh,Bechtelar-VonRueden,1 Macpherson Crossing&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;In this article we’ll see how to load this CSV data into Kafka, without even needing to write any code&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Working with JSON nested arrays in ksqlDB - example</title>
+      <link>https://rmoff.net/2020/05/26/working-with-json-nested-arrays-in-ksqldb-example/</link>
+      <pubDate>Tue, 26 May 2020 10:02:48 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2020/05/26/working-with-json-nested-arrays-in-ksqldb-example/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;Question from the Confluent Community Slack group:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;quoteblock&#34;&gt;
+&lt;blockquote&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;How can I access the data in object in an array like below using ksqlDB stream&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;listingblock&#34;&gt;
+&lt;div class=&#34;content&#34;&gt;
+&lt;pre class=&#34;highlight&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&amp;#34;Total&amp;#34;: [
+        {
+          &amp;#34;TotalType&amp;#34;: &amp;#34;Standard&amp;#34;,
+          &amp;#34;TotalAmount&amp;#34;: 15.99
+        },
+{
+          &amp;#34;TotalType&amp;#34;: &amp;#34;Old Standard&amp;#34;,
+          &amp;#34;TotalAmount&amp;#34;: 16,
+&amp;#34; STID&amp;#34;:56
+        }
+]&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Building a Telegram bot with Apache Kafka and ksqlDB</title>
+      <link>https://rmoff.net/2020/05/18/building-a-telegram-bot-with-apache-kafka-and-ksqldb/</link>
+      <pubDate>Mon, 18 May 2020 11:28:15 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2020/05/18/building-a-telegram-bot-with-apache-kafka-and-ksqldb/</guid>
+      <description>Imagine you’ve got a stream of data; it’s not “big data,” but it’s certainly a lot. Within the data, you’ve got some bits you’re interested in, and of those bits, you’d like to be able to query information about them at any point. Sounds fun, right?
+   What if you didn’t need any datastore other than Apache Kafka itself to be able to do this? What if you could ingest, filter, enrich, aggregate, and query data with just Kafka?</description>
+    </item>
+    
+    <item>
+      <title>Adventures in the Cloud, Part 94: ECS</title>
+      <link>https://rmoff.net/2020/02/13/adventures-in-the-cloud-part-94-ecs/</link>
+      <pubDate>Thu, 13 Feb 2020 00:12:23 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2020/02/13/adventures-in-the-cloud-part-94-ecs/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;My name’s Robin, and I’m a Developer Advocate. What that means in part is that I build a ton of demos, and Docker Compose is my jam. I love using Docker Compose for the same reasons that many people do:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;ulist&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Spin up and tear down fully-functioning multi-component environments with ease. No bespoke builds, no cloning of VMs to preserve &amp;#34;that magic state where everything works&amp;#34;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Repeatability. It’s the same each time.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Portability. I can point someone at a &lt;code&gt;docker-compose.yml&lt;/code&gt; that I’ve written and they can run the same on their machine with the same results almost guaranteed.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Primitive Keys in ksqlDB</title>
+      <link>https://rmoff.net/2020/02/07/primitive-keys-in-ksqldb/</link>
+      <pubDate>Fri, 07 Feb 2020 10:58:06 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2020/02/07/primitive-keys-in-ksqldb/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;ksqlDB 0.7 will add support for message keys as primitive data types beyond just &lt;code&gt;STRING&lt;/code&gt; (which is all we’ve had to date). That means that Kafka messages are going to be much easier to work with, and require less wrangling to get into the form in which you need them. Take an example of a database table that you’ve ingested into a Kafka topic, and want to join to a stream of events. Previously you’d have had to take the Kafka topic into which the table had been ingested and run a ksqlDB processor to re-key the messages such that ksqlDB could join on them. &lt;em&gt;Friends, I am here to tell you that this is no longer needed!&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Monitoring Sonos with ksqlDB, InfluxDB, and Grafana</title>
+      <link>https://rmoff.net/2020/01/21/monitoring-sonos-with-ksqldb-influxdb-and-grafana/</link>
+      <pubDate>Tue, 21 Jan 2020 22:47:35 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2020/01/21/monitoring-sonos-with-ksqldb-influxdb-and-grafana/</guid>
+      <description>I’m quite a fan of Sonos audio equipment but recently had some trouble with some of the devices glitching and even cutting out whilst playing. Under the covers Sonos stuff is running Linux (of course) and exposes some diagnostics through a rudimentary frontend that you can access at http://&amp;lt;sonos player IP&amp;gt;:1400/support/review:
+   Whilst this gives you the current state, you can’t get historical data on it. It felt like the problems were happening &amp;#34;all the time&amp;#34;, but were they actually?</description>
+    </item>
+    
+    <item>
+      <title>Exploring ksqlDB window start time</title>
+      <link>https://rmoff.net/2020/01/09/exploring-ksqldb-window-start-time/</link>
+      <pubDate>Thu, 09 Jan 2020 14:25:01 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2020/01/09/exploring-ksqldb-window-start-time/</guid>
+      <description>Prompted by a question on StackOverflow I had a bit of a dig into how windows behave in ksqlDB, specifically with regards to their start time. This article shows also how to create test data in ksqlDB and create data to be handled with a timestamp in the past.
+ For a general background to windowing in ksqlDB see the excellent docs.
+ The nice thing about recent releases of ksqlDB/KSQL is that you can create and populate streams directly with CREATE STREAM and INSERT INTO respectively.</description>
+    </item>
+    
+    <item>
+      <title>Streaming messages from RabbitMQ into Kafka with Kafka Connect</title>
+      <link>https://rmoff.net/2020/01/08/streaming-messages-from-rabbitmq-into-kafka-with-kafka-connect/</link>
+      <pubDate>Wed, 08 Jan 2020 13:06:57 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2020/01/08/streaming-messages-from-rabbitmq-into-kafka-with-kafka-connect/</guid>
+      <description>This was prompted by a question on StackOverflow to which I thought the answer would be straightforward, but turned out not to be so. And then I got a bit carried away and ended up with a nice example of how you can handle schema-less data coming from a system such as RabbitMQ and apply a schema to it.
+   Note  This same pattern for ingesting bytes and applying a schema will work with other connectors such as MQTT     What?</description>
+    </item>
+    
+    <item>
+      <title>Analysing network behaviour with ksqlDB and MongoDB</title>
+      <link>https://rmoff.net/2019/12/20/analysing-network-behaviour-with-ksqldb-and-mongodb/</link>
+      <pubDate>Fri, 20 Dec 2019 17:23:40 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2019/12/20/analysing-network-behaviour-with-ksqldb-and-mongodb/</guid>
+      <description>In this post I want to build on my previous one and show another use of the Syslog data that I’m capturing. Instead of looking for SSH attacks, I’m going to analyse the behaviour of my networking components.
+   Note  You can find all the code to run this on GitHub.     Getting Syslog data into Kafka As before, let’s create ourselves a syslog connector in ksqlDB:</description>
+    </item>
+    
+    <item>
+      <title>Detecting and Analysing SSH Attacks with ksqlDB</title>
+      <link>https://rmoff.net/2019/12/18/detecting-and-analysing-ssh-attacks-with-ksqldb/</link>
+      <pubDate>Wed, 18 Dec 2019 17:23:40 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2019/12/18/detecting-and-analysing-ssh-attacks-with-ksqldb/</guid>
+      <description>I’ve written previously about ingesting Syslog into Kafka and using KSQL to analyse it. I want to revisit the subject since it’s nearly two years since I wrote about it and some things have changed since then.
+ ksqlDB now includes the ability to define connectors from within it, which makes setting things up loads easier.
+ You can find the full rig to run this on GitHub.
+ Create and configure the Syslog connector To start with, create a source connector:</description>
+    </item>
+    
+    <item>
+      <title>Streaming data from Oracle into Kafka</title>
+      <link>https://rmoff.net/2018/12/12/streaming-data-from-oracle-into-kafka/</link>
+      <pubDate>Wed, 12 Dec 2018 09:49:04 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2018/12/12/streaming-data-from-oracle-into-kafka/</guid>
+      <description>This is a short summary discussing what the options are for integrating Oracle RDBMS into Kafka, as of December 2018 (refreshed June 2020). For a more detailed background to why and how at a broader level for all databases (not just Oracle) see this blog and this talk.
+  What techniques &amp;amp; tools are there? Franck Pachot has written up an excellent analysis of the options available here.
+As of June 2020, this is what the line-up looks like:</description>
+    </item>
+    
+  </channel>
+</rss>

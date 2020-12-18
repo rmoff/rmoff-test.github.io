@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pandoc on rmoff&#39;s random ramblings</title>
+    <link>https://rmoff.net/categories/pandoc/</link>
+    <description>Recent content in pandoc on rmoff&#39;s random ramblings</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 16 Apr 2020 14:27:50 +0100</lastBuildDate><atom:link href="https://rmoff.net/categories/pandoc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Converting from AsciiDoc to Google Docs and MS Word</title>
+      <link>https://rmoff.net/2020/04/16/converting-from-asciidoc-to-google-docs-and-ms-word/</link>
+      <pubDate>Thu, 16 Apr 2020 14:27:50 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2020/04/16/converting-from-asciidoc-to-google-docs-and-ms-word/</guid>
+      <description>Updated 16 April 2020 to cover formatting tricks &amp;amp; add import to Google Docs info
+ Short and sweet this one. I’ve written in the past how I love Markdown but I’ve actually moved on from that and now firmly throw my hat in the AsciiDoc ring. I’ll write another post another time explaining why in more detail, but in short it’s just more powerful whilst still simple and readable without compilation.</description>
+    </item>
+    
+  </channel>
+</rss>

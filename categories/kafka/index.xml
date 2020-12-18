@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kafka on rmoff&#39;s random ramblings</title>
+    <link>https://rmoff.net/categories/kafka/</link>
+    <description>Recent content in kafka on rmoff&#39;s random ramblings</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 03 Nov 2020 17:14:33 +0000</lastBuildDate><atom:link href="https://rmoff.net/categories/kafka/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kafka Connect, ksqlDB, and Kafka Tombstone messages</title>
+      <link>https://rmoff.net/2020/11/03/kafka-connect-ksqldb-and-kafka-tombstone-messages/</link>
+      <pubDate>Tue, 03 Nov 2020 17:14:33 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2020/11/03/kafka-connect-ksqldb-and-kafka-tombstone-messages/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;As you may already realise, Kafka is not just a fancy message bus, or a pipe for big data. It’s an event streaming platform! If this is news to you, I’ll wait here whilst you &lt;a href=&#34;https://www.confluent.io/learn/kafka-tutorial/&#34;&gt;read this&lt;/a&gt; or &lt;a href=&#34;https://rmoff.dev/kafka101&#34;&gt;watch this&lt;/a&gt;…&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Streaming XML messages from IBM MQ into Kafka into MongoDB</title>
+      <link>https://rmoff.net/2020/10/05/streaming-xml-messages-from-ibm-mq-into-kafka-into-mongodb/</link>
+      <pubDate>Mon, 05 Oct 2020 10:09:41 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2020/10/05/streaming-xml-messages-from-ibm-mq-into-kafka-into-mongodb/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;Let’s imagine we have XML data on a queue in IBM MQ, and we want to ingest it into Kafka to then use downstream, perhaps in an application or maybe to stream to a NoSQL store like MongoDB.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;admonitionblock note&#34;&gt;
+&lt;table&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td class=&#34;icon&#34;&gt;
+&lt;div class=&#34;title&#34;&gt;Note&lt;/div&gt;
+&lt;/td&gt;
+&lt;td class=&#34;content&#34;&gt;
+This same pattern for ingesting XML will work with other connectors such as &lt;a href=&#34;https://www.confluent.io/hub/confluentinc/kafka-connect-jms&#34;&gt;JMS&lt;/a&gt; and &lt;a href=&#34;https://www.confluent.io/hub/confluentinc/kafka-connect-activemq&#34;&gt;ActiveMQ&lt;/a&gt;.
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Ingesting XML data into Kafka - Option 3: Kafka Connect FilePulse connector</title>
+      <link>https://rmoff.net/2020/10/01/ingesting-xml-data-into-kafka-option-3-kafka-connect-filepulse-connector/</link>
+      <pubDate>Thu, 01 Oct 2020 15:09:41 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2020/10/01/ingesting-xml-data-into-kafka-option-3-kafka-connect-filepulse-connector/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;👉 &lt;em&gt;&lt;a href=&#34;https://rmoff.net/2020/10/01/ingesting-xml-data-into-kafka-introduction/&#34;&gt;Ingesting XML data into Kafka - Introduction&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;We saw in the &lt;a href=&#34;https://rmoff.net/2020/10/01/ingesting-xml-data-into-kafka-option-1-the-dirty-hack/&#34;&gt;first post&lt;/a&gt; how to hack together an ingestion pipeline for XML into Kafka using a source such as &lt;code&gt;curl&lt;/code&gt; piped through &lt;code&gt;xq&lt;/code&gt; to wrangle the XML and stream it into Kafka using &lt;code&gt;kafkacat&lt;/code&gt;, optionally using ksqlDB to apply and register a schema for it.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;The &lt;a href=&#34;https://rmoff.net/2020/10/01/ingesting-xml-data-into-kafka-option-2-kafka-connect-plus-single-message-transform/&#34;&gt;second one&lt;/a&gt; showed the use of any Kafka Connect source connector plus the &lt;code&gt;kafka-connect-transform-xml&lt;/code&gt; Single Message Transformation. Now we’re going to take a look at a source connector from the community that can also be used to ingest XML data into Kafka.&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Ingesting XML data into Kafka - Option 2: Kafka Connect plus Single Message Transform</title>
+      <link>https://rmoff.net/2020/10/01/ingesting-xml-data-into-kafka-option-2-kafka-connect-plus-single-message-transform/</link>
+      <pubDate>Thu, 01 Oct 2020 14:09:41 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2020/10/01/ingesting-xml-data-into-kafka-option-2-kafka-connect-plus-single-message-transform/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;We previously looked at the background to &lt;a href=&#34;https://rmoff.net/2020/10/01/ingesting-xml-data-into-kafka-introduction/&#34;&gt;getting XML into Kafka&lt;/a&gt;, and potentially &lt;a href=&#34;https://rmoff.net/2020/10/01/ingesting-xml-data-into-kafka-option-1-the-dirty-hack/&#34;&gt;how [not] to do it&lt;/a&gt;. Now let’s look at the &lt;em&gt;proper&lt;/em&gt; way to build a streaming ingestion pipeline for XML into Kafka, using Kafka Connect.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;If you’re unfamiliar with Kafka Connect, check out this &lt;a href=&#34;https://rmoff.dev/what-is-kafka-connect&#34;&gt;quick intro to Kafka Connect here&lt;/a&gt;. Kafka Connect’s excellent plugable architecture means that we can pair any &lt;strong&gt;source connector&lt;/strong&gt; to read XML from wherever we have it (for example, a flat file, or a MQ, or anywhere else), with a &lt;strong&gt;Single Message Transform&lt;/strong&gt; to transform the XML into a payload with a schema, and finally a &lt;strong&gt;converter&lt;/strong&gt; to serialise the data in a form that we would like to use such as Avro or Protobuf.&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Ingesting XML data into Kafka - Introduction</title>
+      <link>https://rmoff.net/2020/10/01/ingesting-xml-data-into-kafka-introduction/</link>
+      <pubDate>Thu, 01 Oct 2020 12:09:41 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2020/10/01/ingesting-xml-data-into-kafka-introduction/</guid>
+      <description>XML has been around for 20+ years, and whilst other ways of serialising our data have gained popularity in more recent times (such as JSON, Avro, and Protobuf), XML is not going away soon. Part of that is down to technical reasons (clearly defined and documented schemas), and part of it is simply down to enterprise inertia - having adopted XML for systems in the last couple of decades, they’re not going to be changing now just for some short-term fad.</description>
+    </item>
+    
+    <item>
+      <title>Learning Golang (some rough notes) - S02E06 - Putting the Producer in a function and handling errors in a Go routine</title>
+      <link>https://rmoff.net/2020/07/15/learning-golang-some-rough-notes-s02e06-putting-the-producer-in-a-function-and-handling-errors-in-a-go-routine/</link>
+      <pubDate>Wed, 15 Jul 2020 14:00:05 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2020/07/15/learning-golang-some-rough-notes-s02e06-putting-the-producer-in-a-function-and-handling-errors-in-a-go-routine/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;When I set out to &lt;a href=&#34;https://rmoff.net/2020/06/25/learning-golang-some-rough-notes-s01e00/&#34;&gt;learn Go&lt;/a&gt; one of the aims I had in mind was to write a version of &lt;a href=&#34;https://github.com/rmoff/kafka-listeners/blob/master/python/python_kafka_test_client.py&#34;&gt;this little Python utility&lt;/a&gt; which accompanies a blog I wrote recently about &lt;a href=&#34;https://www.confluent.io/blog/kafka-client-cannot-connect-to-broker-on-aws-on-docker-etc&#34;&gt;understanding and diagnosing problems with Kafka advertised listeners&lt;/a&gt;. Having successfully got &lt;a href=&#34;https://rmoff.net/2020/07/10/learning-golang-some-rough-notes-s02e02-adding-error-handling-to-the-producer/&#34;&gt;Producer&lt;/a&gt;, &lt;a href=&#34;https://rmoff.net/2020/07/14/learning-golang-some-rough-notes-s02e04-kafka-go-consumer-function-based/&#34;&gt;Consumer&lt;/a&gt;, and &lt;a href=&#34;https://rmoff.net/2020/07/15/learning-golang-some-rough-notes-s02e05-kafka-go-adminclient/&#34;&gt;AdminClient&lt;/a&gt; API examples working, it is now time to turn to that task.&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Learning Golang (some rough notes) - S02E05 - Kafka Go AdminClient</title>
+      <link>https://rmoff.net/2020/07/15/learning-golang-some-rough-notes-s02e05-kafka-go-adminclient/</link>
+      <pubDate>Wed, 15 Jul 2020 11:00:05 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2020/07/15/learning-golang-some-rough-notes-s02e05-kafka-go-adminclient/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;Having ticked off the basics with an Apache Kafka &lt;a href=&#34;https://rmoff.net/2020/07/10/learning-golang-some-rough-notes-s02e02-adding-error-handling-to-the-producer/&#34;&gt;producer&lt;/a&gt; and &lt;a href=&#34;https://rmoff.net/2020/07/14/learning-golang-some-rough-notes-s02e03-kafka-go-consumer-channel-based/&#34;&gt;consumer&lt;/a&gt; in Go, let’s now check out the AdminClient. This is useful for checking out metadata about the cluster, creating topics, and stuff like that.&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Learning Golang (some rough notes) - S02E04 - Kafka Go Consumer (Function-based)</title>
+      <link>https://rmoff.net/2020/07/14/learning-golang-some-rough-notes-s02e04-kafka-go-consumer-function-based/</link>
+      <pubDate>Tue, 14 Jul 2020 13:59:05 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2020/07/14/learning-golang-some-rough-notes-s02e04-kafka-go-consumer-function-based/</guid>
+      <description>Last time I looked at creating my first Apache Kafka consumer in Go, which used the now-deprecated channel-based consumer. Whilst idiomatic for Go, it has some issues which mean that the function-based consumer is recommended for use instead. So let’s go and use it!
+ Instead of reading from the Events() channel of the consumer, we read events using the Poll() function with a timeout. The way we handle events (a switch based on their type) is the same:</description>
+    </item>
+    
+    <item>
+      <title>Learning Golang (some rough notes) - S02E03 - Kafka Go Consumer (Channel-based)</title>
+      <link>https://rmoff.net/2020/07/14/learning-golang-some-rough-notes-s02e03-kafka-go-consumer-channel-based/</link>
+      <pubDate>Tue, 14 Jul 2020 11:59:05 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2020/07/14/learning-golang-some-rough-notes-s02e03-kafka-go-consumer-channel-based/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;Having written my first &lt;a href=&#34;https://rmoff.net/2020/07/08/learning-golang-some-rough-notes-s02e01-my-first-kafka-go-producer/&#34;&gt;Kafka producer in Go&lt;/a&gt;, and even &lt;a href=&#34;https://rmoff.net/2020/07/10/learning-golang-some-rough-notes-s02e02-adding-error-handling-to-the-producer/&#34;&gt;added error handling to it&lt;/a&gt;, the next step was to write a consumer. It follows closely the pattern of &lt;a href=&#34;https://rmoff.net/2020/07/10/learning-golang-some-rough-notes-s02e02-adding-error-handling-to-the-producer/&#34;&gt;Producer code I finished up with previously&lt;/a&gt;, using the channel-based approach for the &lt;a href=&#34;https://docs.confluent.io/current/clients/confluent-kafka-go/index.html#Consumer&#34;&gt;Consumer&lt;/a&gt;:&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Learning Golang (some rough notes) - S02E02 - Adding error handling to the Producer</title>
+      <link>https://rmoff.net/2020/07/10/learning-golang-some-rough-notes-s02e02-adding-error-handling-to-the-producer/</link>
+      <pubDate>Fri, 10 Jul 2020 10:59:05 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2020/07/10/learning-golang-some-rough-notes-s02e02-adding-error-handling-to-the-producer/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;I looked &lt;a href=&#34;https://rmoff.net/2020/07/08/learning-golang-some-rough-notes-s02e01-my-first-kafka-go-producer/&#34;&gt;last time&lt;/a&gt; at the very bare basics of writing a Kafka producer using Go. It worked, but only with everything lined up and pointing the right way. There was no error handling of any sorts. Let’s see about fixing this now.&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Learning Golang (some rough notes) - S02E01 - My First Kafka Go Producer</title>
+      <link>https://rmoff.net/2020/07/08/learning-golang-some-rough-notes-s02e01-my-first-kafka-go-producer/</link>
+      <pubDate>Wed, 08 Jul 2020 17:59:05 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2020/07/08/learning-golang-some-rough-notes-s02e01-my-first-kafka-go-producer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Learning Golang (some rough notes) - S02E00 - Kafka and Go</title>
+      <link>https://rmoff.net/2020/07/08/learning-golang-some-rough-notes-s02e00-kafka-and-go/</link>
+      <pubDate>Wed, 08 Jul 2020 10:59:05 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2020/07/08/learning-golang-some-rough-notes-s02e00-kafka-and-go/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;With the first leg of my journey with Go &lt;a href=&#34;https://rmoff.net/2020/07/03/learning-golang-some-rough-notes-s01e10-concurrency-web-crawler/&#34;&gt;done&lt;/a&gt; (starting from a &lt;a href=&#34;https://rmoff.net/2020/06/25/learning-golang-some-rough-notes-s01e00/&#34;&gt;&lt;em&gt;very&lt;/em&gt; rudimentary base&lt;/a&gt;), the next step for me was to bring it into my current area of interest and work - Apache Kafka.&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>A quick and dirty way to monitor data arriving on Kafka</title>
+      <link>https://rmoff.net/2020/04/16/a-quick-and-dirty-way-to-monitor-data-arriving-on-kafka/</link>
+      <pubDate>Thu, 16 Apr 2020 00:51:18 +0100</pubDate>
+      
+      <guid>https://rmoff.net/2020/04/16/a-quick-and-dirty-way-to-monitor-data-arriving-on-kafka/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;I’ve been poking around recently with &lt;a href=&#34;https://rmoff.net/2020/03/11/streaming-wi-fi-trace-data-from-raspberry-pi-to-apache-kafka-with-confluent-cloud/&#34;&gt;capturing Wi-Fi packet data&lt;/a&gt; and streaming it into Apache Kafka, from where I’m processing and analysing it. Kafka itself is rock-solid - because I’m using &lt;a href=&#34;https://confluent.cloud/signup&#34;&gt;☁️Confluent Cloud&lt;/a&gt; and someone else worries about provisioning it, scaling it, and keeping it running for me. But whilst Kafka works just great, my side of the setup—&lt;code&gt;tshark&lt;/code&gt; running on a Raspberry Pi—is less than stable. For whatever reason it sometimes stalls and I have to restart the Raspberry Pi and restart the capture process.&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Adventures in the Cloud, Part 94: ECS</title>
+      <link>https://rmoff.net/2020/02/13/adventures-in-the-cloud-part-94-ecs/</link>
+      <pubDate>Thu, 13 Feb 2020 00:12:23 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2020/02/13/adventures-in-the-cloud-part-94-ecs/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;My name’s Robin, and I’m a Developer Advocate. What that means in part is that I build a ton of demos, and Docker Compose is my jam. I love using Docker Compose for the same reasons that many people do:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;ulist&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Spin up and tear down fully-functioning multi-component environments with ease. No bespoke builds, no cloning of VMs to preserve &amp;#34;that magic state where everything works&amp;#34;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Repeatability. It’s the same each time.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Portability. I can point someone at a &lt;code&gt;docker-compose.yml&lt;/code&gt; that I’ve written and they can run the same on their machine with the same results almost guaranteed.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Analysing network behaviour with ksqlDB and MongoDB</title>
+      <link>https://rmoff.net/2019/12/20/analysing-network-behaviour-with-ksqldb-and-mongodb/</link>
+      <pubDate>Fri, 20 Dec 2019 17:23:40 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2019/12/20/analysing-network-behaviour-with-ksqldb-and-mongodb/</guid>
+      <description>In this post I want to build on my previous one and show another use of the Syslog data that I’m capturing. Instead of looking for SSH attacks, I’m going to analyse the behaviour of my networking components.
+   Note  You can find all the code to run this on GitHub.     Getting Syslog data into Kafka As before, let’s create ourselves a syslog connector in ksqlDB:</description>
+    </item>
+    
+    <item>
+      <title>Detecting and Analysing SSH Attacks with ksqlDB</title>
+      <link>https://rmoff.net/2019/12/18/detecting-and-analysing-ssh-attacks-with-ksqldb/</link>
+      <pubDate>Wed, 18 Dec 2019 17:23:40 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2019/12/18/detecting-and-analysing-ssh-attacks-with-ksqldb/</guid>
+      <description>I’ve written previously about ingesting Syslog into Kafka and using KSQL to analyse it. I want to revisit the subject since it’s nearly two years since I wrote about it and some things have changed since then.
+ ksqlDB now includes the ability to define connectors from within it, which makes setting things up loads easier.
+ You can find the full rig to run this on GitHub.
+ Create and configure the Syslog connector To start with, create a source connector:</description>
+    </item>
+    
+    <item>
+      <title>Kafka Connect - Request timed out</title>
+      <link>https://rmoff.net/2019/11/29/kafka-connect-request-timed-out/</link>
+      <pubDate>Fri, 29 Nov 2019 14:37:24 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2019/11/29/kafka-connect-request-timed-out/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;A short &amp;amp; sweet blog post to help people Googling for this error, and me next time I encounter it.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;The scenario: trying to create a connector in Kafka Connect (running in distributed mode, one worker) failed with the &lt;code&gt;curl&lt;/code&gt; response&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;paragraph&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;HTTP/1.1 &lt;span style=&#34;color:#666&#34;&gt;500&lt;/span&gt; Internal Server Error
+Date: Fri, &lt;span style=&#34;color:#666&#34;&gt;29&lt;/span&gt; Nov &lt;span style=&#34;color:#666&#34;&gt;2019&lt;/span&gt; 14:33:53 GMT
+Content-Type: application/json
+Content-Length: &lt;span style=&#34;color:#666&#34;&gt;48&lt;/span&gt;
+Server: Jetty&lt;span style=&#34;color:#666&#34;&gt;(&lt;/span&gt;9.4.18.v20190429&lt;span style=&#34;color:#666&#34;&gt;)&lt;/span&gt;
+
+&lt;span style=&#34;color:#666&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#ba2121&#34;&gt;&amp;#34;error_code&amp;#34;&lt;/span&gt;:500,&lt;span style=&#34;color:#ba2121&#34;&gt;&amp;#34;message&amp;#34;&lt;/span&gt;:&lt;span style=&#34;color:#ba2121&#34;&gt;&amp;#34;Request timed out&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Resetting a Consumer Group in Kafka</title>
+      <link>https://rmoff.net/2019/08/09/resetting-a-consumer-group-in-kafka/</link>
+      <pubDate>Fri, 09 Aug 2019 16:32:46 +0200</pubDate>
+      
+      <guid>https://rmoff.net/2019/08/09/resetting-a-consumer-group-in-kafka/</guid>
+      <description>I’ve been using Replicator as a powerful way to copy data from my Kafka rig at home onto my laptop’s Kafka environment. It means that when I’m on the road I can continue to work with the same set of data and develop pipelines etc. With a VPN back home I can even keep them in sync directly if I want to.
+ I hit a problem the other day where Replicator was running, but I had no data in my target topics on my laptop.</description>
+    </item>
+    
+    <item>
+      <title>Flatten CDC records in KSQL</title>
+      <link>https://rmoff.net/2018/10/11/flatten-cdc-records-in-ksql/</link>
+      <pubDate>Thu, 11 Oct 2018 15:13:59 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2018/10/11/flatten-cdc-records-in-ksql/</guid>
+      <description>&lt;h3 id=&#34;the-problem---nested-messages-in-kafka&#34;&gt;The problem - nested messages in Kafka&lt;/h3&gt;
+&lt;p&gt;Data comes into Kafka in many shapes and sizes. Sometimes it&amp;rsquo;s from CDC tools, and may be nested like this:&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Exploring JMX with jmxterm</title>
+      <link>https://rmoff.net/2018/09/19/exploring-jmx-with-jmxterm/</link>
+      <pubDate>Wed, 19 Sep 2018 08:11:00 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2018/09/19/exploring-jmx-with-jmxterm/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;Check out the &lt;a href=&#34;https://github.com/jiaqi/jmxterm/&#34;&gt;jmxterm repository&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Download jmxterm from &lt;a href=&#34;https://docs.cyclopsgroup.org/jmxterm&#34;&gt;https://docs.cyclopsgroup.org/jmxterm&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>Accessing Kafka Docker containers&#39; JMX from host</title>
+      <link>https://rmoff.net/2018/09/17/accessing-kafka-docker-containers-jmx-from-host/</link>
+      <pubDate>Mon, 17 Sep 2018 15:29:48 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2018/09/17/accessing-kafka-docker-containers-jmx-from-host/</guid>
+      <description>See also docs.
+To help future Googlers… with the Confluent docker images for Kafka, KSQL, Kafka Connect, etc, if you want to access JMX metrics from within, you just need to pass two environment variables: &amp;lt;x&amp;gt;_JMX_HOSTNAME and &amp;lt;x&amp;gt;_JMX_PORT, prefixed by a component name.
+  &amp;lt;x&amp;gt;_JMX_HOSTNAME - the hostname/IP of the JMX host machine, as accessible from the JMX Client.
+This is used by the JMX client to connect back into JMX, so must be accessible from the host machine running the JMX client.</description>
+    </item>
+    
+    <item>
+      <title>Sending multiline messages to Kafka</title>
+      <link>https://rmoff.net/2018/09/04/sending-multiline-messages-to-kafka/</link>
+      <pubDate>Tue, 04 Sep 2018 08:26:51 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2018/09/04/sending-multiline-messages-to-kafka/</guid>
+      <description>(SO answer repost)
+You can use kafkacat to send messages to Kafka that include line breaks. To do this, use its -D operator to specify a custom message delimiter (in this example /):
+kafkacat -b kafka:29092 \ -t test_topic_01 \ -D/ \ -P &amp;lt;&amp;lt;EOF this is a string message with a line break/this is another message with two line breaks! EOF  Note that the delimiter must be a single byte - multi-byte chars will end up getting included in the resulting message See issue #140</description>
+    </item>
+    
+    <item>
+      <title>Kafka Listeners - Explained</title>
+      <link>https://rmoff.net/2018/08/02/kafka-listeners-explained/</link>
+      <pubDate>Thu, 02 Aug 2018 19:38:00 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2018/08/02/kafka-listeners-explained/</guid>
+      <description>&lt;p&gt;&lt;em&gt;(This was cross-posted on the &lt;a href=&#34;https://www.confluent.io/blog/kafka-listeners-explained&#34;&gt;Confluent.io blog&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;This question comes up on StackOverflow and such places a &lt;strong&gt;lot&lt;/strong&gt;, so here&amp;rsquo;s something to try and help.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;tl;dr&lt;/strong&gt; : You need to set &lt;code&gt;advertised.listeners&lt;/code&gt; (or &lt;code&gt;KAFKA_ADVERTISED_LISTENERS&lt;/code&gt; if you&amp;rsquo;re using Docker images) to the external address (host/IP) so that clients can correctly connect to it. Otherwise they&amp;rsquo;ll try to connect to the internal host address–and if that&amp;rsquo;s not reachable then problems ensue.&lt;/p&gt;
+&lt;p&gt;Put another way, courtesy of Spencer Ruport:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;LISTENERS&lt;/code&gt; are what interfaces Kafka binds to. &lt;code&gt;ADVERTISED_LISTENERS&lt;/code&gt;  are how clients can connect.&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>Quick &#39;n Easy Population of Realistic Test Data into Kafka</title>
+      <link>https://rmoff.net/2018/05/10/quick-n-easy-population-of-realistic-test-data-into-kafka/</link>
+      <pubDate>Thu, 10 May 2018 12:56:00 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2018/05/10/quick-n-easy-population-of-realistic-test-data-into-kafka/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;tl;dr&lt;/strong&gt; Use &lt;code&gt;curl&lt;/code&gt; to pull data from the Mockaroo REST endpoint, and pipe it into &lt;code&gt;kafkacat&lt;/code&gt;, thus:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;curl -s &amp;quot;https://api.mockaroo.com/api/d5a195e0?count=2&amp;amp;key=ff7856d0&amp;quot;| \
+kafkacat -b localhost:9092 -t purchases -P
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>Streaming Data from MySQL into Kafka with Kafka Connect and Debezium</title>
+      <link>https://rmoff.net/2018/03/24/streaming-data-from-mysql-into-kafka-with-kafka-connect-and-debezium/</link>
+      <pubDate>Sat, 24 Mar 2018 14:58:14 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2018/03/24/streaming-data-from-mysql-into-kafka-with-kafka-connect-and-debezium/</guid>
+      <description>Debezium is a CDC tool that can stream changes from MySQL, MongoDB, and PostgreSQL into Kafka, using Kafka Connect. In this article we&amp;rsquo;ll see how to set it up and examine the format of the data. A subsequent article will show using this realtime stream of data from a RDBMS and join it to data originating from other sources, using KSQL.
+The software versions used here are:
+ Confluent Platform 4.</description>
+    </item>
+    
+    <item>
+      <title>Streaming data from Kafka into Elasticsearch</title>
+      <link>https://rmoff.net/2018/03/06/streaming-data-from-kafka-into-elasticsearch/</link>
+      <pubDate>Tue, 06 Mar 2018 22:21:00 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2018/03/06/streaming-data-from-kafka-into-elasticsearch/</guid>
+      <description>This article is part of a series exploring Streaming ETL in practice. You can read about setting up the ingest of realtime events from a standard Oracle platform, and building streaming ETL using KSQL.
+ This post shows how we take data streaming in from an Oracle transactional system into Kafka, and simply stream it onwards into Elasticsearch. This is a common pattern, for enabling rapid search or analytics against data held in systems elsewhere.</description>
+    </item>
+    
+    <item>
+      <title>Installing the Python Kafka library from Confluent - troubleshooting some silly errors…</title>
+      <link>https://rmoff.net/2018/03/06/installing-the-python-kafka-library-from-confluent-troubleshooting-some-silly-errors/</link>
+      <pubDate>Tue, 06 Mar 2018 22:18:24 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2018/03/06/installing-the-python-kafka-library-from-confluent-troubleshooting-some-silly-errors/</guid>
+      <description>System:
+rmoff@proxmox01:~$ uname -a Linux proxmox01 4.4.6-1-pve #1 SMP Thu Apr 21 11:25:40 CEST 2016 x86_64 GNU/Linux rmoff@proxmox01:~$ head -n1 /etc/os-release PRETTY_NAME=&amp;quot;Debian GNU/Linux 8 (jessie)&amp;quot; rmoff@proxmox01:~$ python --version Python 2.7.9 Following:
+ https://www.confluent.io/blog/introduction-to-apache-kafka-for-python-programmers/ https://github.com/confluentinc/confluent-kafka-python  Install librdkafka, which is a pre-req for the Python library:
+wget -qO - https://packages.confluent.io/deb/4.0/archive.key | sudo apt-key add - sudo add-apt-repository &amp;quot;deb [arch=amd64] https://packages.confluent.io/deb/4.0 stable main&amp;quot; sudo apt-get install librdkafka-dev python-dev  Setup virtualenv:
+sudo apt-get install virtualenv virtualenv kafka_push_notify source .</description>
+    </item>
+    
+    <item>
+      <title>Kafka - AdminClient - Connection to node -1 could not be established. Broker may not be available</title>
+      <link>https://rmoff.net/2018/01/03/kafka-adminclient-connection-to-node-1-could-not-be-established.-broker-may-not-be-available/</link>
+      <pubDate>Wed, 03 Jan 2018 11:26:00 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2018/01/03/kafka-adminclient-connection-to-node-1-could-not-be-established.-broker-may-not-be-available/</guid>
+      <description>See also Kafka Listeners - Explained
+ A short post to help Googlers. On a single-node sandbox Apache Kafka / Confluent Platform installation, I was getting this error from Schema Registry, Connect, etc:
+WARN [AdminClient clientId=adminclient-3] Connection to node -1 could not be established. Broker may not be available. (org.apache.kafka.clients.NetworkClient)  KSQL was throwing a similar error:
+KSQL cannot initialize AdminCLient.  I had correctly set the machine&amp;rsquo;s hostname in my Kafka server.</description>
+    </item>
+    
+    <item>
+      <title>Installing Oracle GoldenGate for Big Data 12.3.1 with Kafka Connect and Confluent Platform</title>
+      <link>https://rmoff.net/2017/11/21/installing-oracle-goldengate-for-big-data-12.3.1-with-kafka-connect-and-confluent-platform/</link>
+      <pubDate>Tue, 21 Nov 2017 17:31:00 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2017/11/21/installing-oracle-goldengate-for-big-data-12.3.1-with-kafka-connect-and-confluent-platform/</guid>
+      <description>Some notes that I made on installing and configuring Oracle GoldenGate with Confluent Platform. Excuse the brevity, but hopefully useful to share!
+ I used the Oracle Developer Days VM for this - it&amp;rsquo;s preinstalled with Oracle 12cR2. Big Data Lite is nice but currently has an older version of GoldenGate.
+Login to the VM (oracle/oracle) and then install some useful things:
+sudo rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm sudo yum install -y screen htop collectl rlwrap p7zip unzip sysstat perf iotop sudo su - cd /etc/yum.</description>
+    </item>
+    
+    <item>
+      <title>Apache Kafka™ talks at Oracle OpenWorld, JavaOne, and Oak Table World 2017</title>
+      <link>https://rmoff.net/2017/09/20/apache-kafka-talks-at-oracle-openworld-javaone-and-oak-table-world-2017/</link>
+      <pubDate>Wed, 20 Sep 2017 15:46:00 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2017/09/20/apache-kafka-talks-at-oracle-openworld-javaone-and-oak-table-world-2017/</guid>
+      <description>There&amp;rsquo;s an impressive 19 sessions that cover Apache Kafka™ at Oracle OpenWorld, JavaOne, and Oak Table World this year! You can find the full list with speakers in the session catalogs for OOW, JavaOne, and Oak Table World. OTW is an awesome techie conference which is at the same time as OpenWorld, next door to Moscone. Hope to see you there!
+Check out the writeup of my previous visit to OOW including useful tips here.</description>
+    </item>
+    
+    <item>
+      <title>Configuring Kafka Connect to log REST HTTP messages to a separate file</title>
+      <link>https://rmoff.net/2017/06/12/configuring-kafka-connect-to-log-rest-http-messages-to-a-separate-file/</link>
+      <pubDate>Mon, 12 Jun 2017 15:28:15 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2017/06/12/configuring-kafka-connect-to-log-rest-http-messages-to-a-separate-file/</guid>
+      <description>Kafka&amp;rsquo;s Connect API is a wondrous way of easily bringing data in and out of Apache Kafka without having to write a line of code. By choosing a Connector from the many available, it&amp;rsquo;s possible to set up and end-to-end data pipeline with just a few lines of configuration. You can configure this by hand, or you can use the Confluent Control Center, for both management and monitoring:
+BUT &amp;hellip; there are times when not all goes well - perhaps your source has gone offline, or one of your targets has been misconfigured.</description>
+    </item>
+    
+    <item>
+      <title>kafka.common.KafkaException: No key found on line 1</title>
+      <link>https://rmoff.net/2017/05/12/kafka.common.kafkaexception-no-key-found-on-line-1/</link>
+      <pubDate>Fri, 12 May 2017 00:52:41 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2017/05/12/kafka.common.kafkaexception-no-key-found-on-line-1/</guid>
+      <description>A very silly PEBCAK problem this one, but Google hits weren&amp;rsquo;t so helpful so here goes.
+Running a console producer, specifying keys:
+kafka-console-producer \ --broker-list localhost:9092 \ --topic test_topic \ --property parse.key=true \ --property key.seperator=,  Failed when I entered a key/value:
+1,foo kafka.common.KafkaException: No key found on line 1: 1,foo at kafka.tools.ConsoleProducer$LineMessageReader.readMessage(ConsoleProducer.scala:314) at kafka.tools.ConsoleProducer$.main(ConsoleProducer.scala:55) at kafka.tools.ConsoleProducer.main(ConsoleProducer.scala) kafka.common.KafkaException: No key found on line &amp;hellip; but I specified the key, didn&amp;rsquo;t I?</description>
+    </item>
+    
+    <item>
+      <title>kafka-avro-console-producer - Error registering Avro schema / io.confluent.kafka.schemaregistry.client.rest.exceptions.RestClientException</title>
+      <link>https://rmoff.net/2016/12/02/kafka-avro-console-producer-error-registering-avro-schema-/-io.confluent.kafka.schemaregistry.client.rest.exceptions.restclientexception/</link>
+      <pubDate>Fri, 02 Dec 2016 11:35:57 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2016/12/02/kafka-avro-console-producer-error-registering-avro-schema-/-io.confluent.kafka.schemaregistry.client.rest.exceptions.restclientexception/</guid>
+      <description>By default, the kafka-avro-console-producer will assume that the schema registry is on port 8081, and happily connect to it. Unfortunately, this can lead to some weird errors if another process happens to be listening on port 8081 already!
+[oracle@bigdatalite tmp]$ kafka-avro-console-producer \ &amp;gt; --broker-list localhost:9092 --topic kudu_test \ &amp;gt; --property value.schema=&#39;{&amp;quot;type&amp;quot;:&amp;quot;record&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;myrecord&amp;quot;,&amp;quot;fields&amp;quot;:[{&amp;quot;name&amp;quot;:&amp;quot;id&amp;quot;,&amp;quot;type&amp;quot;:&amp;quot;int&amp;quot;},{&amp;quot;name&amp;quot;:&amp;quot;random_field&amp;quot;, &amp;quot;type&amp;quot;: &amp;quot;string&amp;quot;}]}&#39; {&amp;quot;id&amp;quot;: 999, &amp;quot;random_field&amp;quot;: &amp;quot;foo&amp;quot;} org.apache.kafka.common.errors.SerializationException: Error registering Avro schema: {&amp;quot;type&amp;quot;:&amp;quot;record&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;myrecord&amp;quot;,&amp;quot;fields&amp;quot;:[{&amp;quot;name&amp;quot;:&amp;quot;id&amp;quot;,&amp;quot;type&amp;quot;:&amp;quot;int&amp;quot;},{&amp;quot;name&amp;quot;:&amp;quot;random_field&amp;quot;,&amp;quot;type&amp;quot;:&amp;quot;string&amp;quot;}]} Caused by: io.confluent.kafka.schemaregistry.client.rest.exceptions.RestClientException: Unexpected character (&#39;&amp;lt;&#39; (code 60)): expected a valid value (number, String, array, object, &#39;true&#39;, &#39;false&#39; or &#39;null&#39;) at [Source: sun.</description>
+    </item>
+    
+    <item>
+      <title>Kafka Connect - java.lang.IncompatibleClassChangeError</title>
+      <link>https://rmoff.net/2016/11/24/kafka-connect-java.lang.incompatibleclasschangeerror/</link>
+      <pubDate>Thu, 24 Nov 2016 20:58:44 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2016/11/24/kafka-connect-java.lang.incompatibleclasschangeerror/</guid>
+      <description>I hit this error running Kafka Connect HDFS connector from Confluent Platform v3.1.1 on BigDataLite 4.6:
+[oracle@bigdatalite ~]$ connect-standalone /etc/schema-registry/connect-avro-standalone.properties /etc/kafka-connect-hdfs/quickstart-hdfs.properties [...] Exception in thread &amp;quot;main&amp;quot; java.lang.IncompatibleClassChangeError: Implementing class at java.lang.ClassLoader.defineClass1(Native Method) at java.lang.ClassLoader.defineClass(ClassLoader.java:763) at java.security.SecureClassLoader.defineClass(SecureClassLoader.java:142) at java.net.URLClassLoader.defineClass(URLClassLoader.java:467) at java.net.URLClassLoader.access$100(URLClassLoader.java:73) at java.net.URLClassLoader$1.run(URLClassLoader.java:368) at java.net.URLClassLoader$1.run(URLClassLoader.java:362) at java.security.AccessController.doPrivileged(Native Method) at java.net.URLClassLoader.findClass(URLClassLoader.java:361) at java.lang.ClassLoader.loadClass(ClassLoader.java:424) at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331) at java.lang.ClassLoader.loadClass(ClassLoader.java:357) at java.lang.ClassLoader.defineClass1(Native Method) at java.lang.ClassLoader.defineClass(ClassLoader.java:763) The fix was to unset the CLASSPATH first:
+unset CLASSPATH  </description>
+    </item>
+    
+    <item>
+      <title>OGG-15051 oracle.goldengate.util.GGException:  Class not found: &#34;kafkahandler&#34;</title>
+      <link>https://rmoff.net/2016/07/29/ogg-15051-oracle.goldengate.util.ggexception-class-not-found-kafkahandler/</link>
+      <pubDate>Fri, 29 Jul 2016 07:47:30 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2016/07/29/ogg-15051-oracle.goldengate.util.ggexception-class-not-found-kafkahandler/</guid>
+      <description>Similar to the previous issue, the sample config in the docs causes another snafu:
+OGG-15051 Java or JNI exception: oracle.goldengate.util.GGException: Class not found: &amp;quot;kafkahandler&amp;quot;. kafkahandler Class not found: &amp;quot;kafkahandler&amp;quot;. kafkahandler This time it&amp;rsquo;s in the kafka.props file:
+gg.handler.kafkahandler.Type = kafka Should be
+gg.handler.kafkahandler.type = kafka No capital T in Type!
+ (Image credit: https://unsplash.com/@vanschneider)</description>
+    </item>
+    
+    <item>
+      <title>OGG -  Class not found: &#34;com.company.kafka.CustomProducerRecord&#34;</title>
+      <link>https://rmoff.net/2016/07/28/ogg-class-not-found-com.company.kafka.customproducerrecord/</link>
+      <pubDate>Thu, 28 Jul 2016 16:34:37 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2016/07/28/ogg-class-not-found-com.company.kafka.customproducerrecord/</guid>
+      <description>In the documentation for the current release of Oracle GoldenGate for Big Data (12.2.0.1.1.011) there&amp;rsquo;s a helpful sample configuration, which isn&amp;rsquo;t so helpful &amp;hellip;
+[...] gg.handler.kafkahandler.ProducerRecordClass = com.company.kafka.CustomProducerRecord [...] This value for gg.handler.kafkahandler.ProducerRecordClass will cause a failure when you start the replicat:
+[...] Class not found: &amp;quot;com.company.kafka.CustomProducerRecord&amp;quot; [...]  If you comment this configuration item out, it&amp;rsquo;ll use the default (oracle.goldengate.handler.kafka.DefaultProducerRecord) and work swimingly!
+ (Image credit: https://unsplash.com/@vanschneider)</description>
+    </item>
+    
+    <item>
+      <title>Kafka Connect JDBC - Oracle - Number of groups must be positive</title>
+      <link>https://rmoff.net/2016/07/27/kafka-connect-jdbc-oracle-number-of-groups-must-be-positive/</link>
+      <pubDate>Wed, 27 Jul 2016 15:23:14 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2016/07/27/kafka-connect-jdbc-oracle-number-of-groups-must-be-positive/</guid>
+      <description>There are various reasons for this error, but the one I hit was that the table name is case sensitive, and returned from Oracle by the JDBC driver in uppercase.
+If you specify the tablename in your connecter config in lowercase, it won&amp;rsquo;t be matched, and this error is thrown. You can validate this by setting debug logging (edit etc/kafka/connect-log4j.properties to set log4j.rootLogger=DEBUG, stdout), and observe: (I&amp;rsquo;ve truncated some of the output for legibility)</description>
+    </item>
+    
+    <item>
+      <title>Kafka Connect - HDFS with Hive Integration - SchemaProjectorException - Schema version required</title>
+      <link>https://rmoff.net/2016/07/19/kafka-connect-hdfs-with-hive-integration-schemaprojectorexception-schema-version-required/</link>
+      <pubDate>Tue, 19 Jul 2016 14:36:52 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2016/07/19/kafka-connect-hdfs-with-hive-integration-schemaprojectorexception-schema-version-required/</guid>
+      <description>I&amp;rsquo;ve been doing some noodling around with Confluent&amp;rsquo;s Kafka Connect recently, as part of gaining a wider understanding into Kafka. If you&amp;rsquo;re not familiar with Kafka Connect this page gives a good idea of the thinking behind it.
+One issue that I hit defeated my Google-fu so I&amp;rsquo;m recording it here to hopefully help out fellow n00bs.
+The pipeline that I&amp;rsquo;d set up looked like this:
+ Eneco&amp;rsquo;s Twitter Source streaming tweets to a Kafka topic Confluent&amp;rsquo;s HDFS Sink to stream tweets to HDFS and define Hive table automagically over them  It worked great, but only if I didn&amp;rsquo;t enable the Hive integration part.</description>
+    </item>
+    
+    <item>
+      <title>Streaming Data through Oracle GoldenGate to Elasticsearch</title>
+      <link>https://rmoff.net/2016/04/14/streaming-data-through-oracle-goldengate-to-elasticsearch/</link>
+      <pubDate>Thu, 14 Apr 2016 22:51:43 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2016/04/14/streaming-data-through-oracle-goldengate-to-elasticsearch/</guid>
+      <description>Recently added to the oracledi project over at java.net is an adaptor enabling Oracle GoldenGate (OGG) to send data to Elasticsearch. This adds a powerful alternative to [micro-]batch extract via JDBC from Oracle to Elasticsearch, which I wrote about recently over at the Elastic blog.
+Elasticsearch is a &amp;lsquo;document store&amp;rsquo; widely used for both search and analytics. It&amp;rsquo;s something I&amp;rsquo;ve written a lot about (here and here for archives), as well as spoken about - preaching the good word, as it were, since the Elastic stack as a whole is very very good at what it does and a pleasure to work with.</description>
+    </item>
+    
+    <item>
+      <title>Decoupling the Data Pipeline with Kafka - A (Very) Simple Real Life Example</title>
+      <link>https://rmoff.net/2016/04/12/decoupling-the-data-pipeline-with-kafka-a-very-simple-real-life-example/</link>
+      <pubDate>Tue, 12 Apr 2016 21:50:46 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2016/04/12/decoupling-the-data-pipeline-with-kafka-a-very-simple-real-life-example/</guid>
+      <description>I&amp;rsquo;ve recently been playing around with the ELK stack (now officially known as the Elastic stack) collecting data from an IRC channel with Elastic&amp;rsquo;s Logstash, storing it in Elasticsearch and analysing it with Kibana. But, this isn&amp;rsquo;t an &amp;ldquo;ELK&amp;rdquo; post - this is a Kafka post! ELK is just some example data manipulation tooling that helps demonstrate the principles.
+As I wrote about last year, Apache Kafka provides a handy way to build flexible &amp;ldquo;pipelines&amp;rdquo;.</description>
+    </item>
+    
+    <item>
+      <title>Fun and Games with Oracle GoldenGate, Kafka, and Logstash on BigDataLite 4.4</title>
+      <link>https://rmoff.net/2016/03/16/fun-and-games-with-oracle-goldengate-kafka-and-logstash-on-bigdatalite-4.4/</link>
+      <pubDate>Wed, 16 Mar 2016 22:01:00 +0000</pubDate>
+      
+      <guid>https://rmoff.net/2016/03/16/fun-and-games-with-oracle-goldengate-kafka-and-logstash-on-bigdatalite-4.4/</guid>
+      <description>The Oracle by Example (ObE) here demonstrating how to use Goldengate to replicate transactions big data targets such as HDFS is written for the BigDataLite 4.2.1, and for me didn&amp;rsquo;t work on the current latest version, 4.4.0.
+The OBE (and similar Hands On Lab PDF) assume the presence of pmov.prm and pmov.properties in /u01/ogg/dirprm/. On BDL 4.4 there&amp;rsquo;s only the extract to from Oracle configuration, emov.
+Fortunately it&amp;rsquo;s still possible to run this setup out of the box in BDL 4.</description>
+    </item>
+    
+  </channel>
+</rss>
